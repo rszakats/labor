@@ -1,0 +1,17 @@
+\select@language {hungarian} \contentsline {section}{\numberline {1}El\IeC {\H o}felt\IeC {\'e}telek}{2}{section.1}% 
+\select@language {hungarian} \contentsline {section}{\numberline {2}Bevezet\IeC {\'e}s}{2}{section.2}% 
+\select@language {hungarian} \contentsline {section}{\numberline {3}Fits f\IeC {\'a}jlok kezel\IeC {\'e}se}{3}{section.3}% 
+\select@language {hungarian} \contentsline {section}{\numberline {4}Reduk\IeC {\'a}l\IeC {\'a}s}{4}{section.4}% 
+\select@language {hungarian} \contentsline {subsection}{\numberline {4.1}Master bias}{5}{subsection.4.1}% 
+\select@language {hungarian} \contentsline {subsection}{\numberline {4.2}Master dark}{6}{subsection.4.2}% 
+\select@language {hungarian} \contentsline {subsection}{\numberline {4.3}Master flat}{8}{subsection.4.3}% 
+\select@language {hungarian} \contentsline {subsection}{\numberline {4.4}Az objektumk\IeC {\'e}pek feldolgoz\IeC {\'a}sa}{9}{subsection.4.4}% 
+\select@language {hungarian} \contentsline {section}{\numberline {5}Az objektumk\IeC {\'e}pek regisztr\IeC {\'a}ci\IeC {\'o}ja}{9}{section.5}% 
+\select@language {hungarian} \contentsline {subsection}{\numberline {5.1}Csillagkeres\IeC {\'e}s}{9}{subsection.5.1}% 
+\select@language {hungarian} \contentsline {subsection}{\numberline {5.2}K\IeC {\'e}ptranszform\IeC {\'a}ci\IeC {\'o}k kisz\IeC {\'a}m\IeC {\'\i }t\IeC {\'a}sa}{11}{subsection.5.2}% 
+\select@language {hungarian} \contentsline {subsection}{\numberline {5.3}A k\IeC {\'e}pek \IeC {\"o}sszetol\IeC {\'a}sa}{11}{subsection.5.3}% 
+\select@language {hungarian} \contentsline {section}{\numberline {6}Fotometria}{12}{section.6}% 
+\select@language {hungarian} \contentsline {subsection}{\numberline {6.1}Az XX Cyg azonos\IeC {\'\i }t\IeC {\'a}sa}{12}{subsection.6.1}% 
+\select@language {hungarian} \contentsline {subsection}{\numberline {6.2}Apert\IeC {\'u}ra fotometria}{13}{subsection.6.2}% 
+\select@language {hungarian} \contentsline {subsection}{\numberline {6.3}Differenci\IeC {\'a}lis fotometria}{16}{subsection.6.3}% 
+\select@language {hungarian} \contentsline {section}{\numberline {7}Jegyz\IeC {\H o}k\IeC {\"o}nyv}{17}{section.7}% 

@@ -2,29 +2,36 @@
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{mwe}
+\usepackage[hungarian]{babel}
 
+\textwidth=450pt
 \begin{document}
 
-\title{Haladó labor, Piszkéstető}
+\title{ELTE Haladó labor, Piszkéstető}
 \author{Szakáts Róbert}
 
 \maketitle
+\tableofcontents
+\newpage
 
 \section{Előfeltételek}
 
 \begin{itemize}
   \item Saját otthoni gépen futó, modern linux operációs rendszer, pl. Debian 10.
-  \item bash
+  \item bash (\url{http://www.tldp.org/LDP/Bash-Beginners-Guide/html/})
   \item FITSH (\url{https://fitsh.net/})
-  \item Gnuplot
-  \item awk
+  \item Gnuplot (\url{http://www.gnuplot.info/})
+  \item awk (\url{https://www.linuxtechi.com/awk-command-tutorial-with-examples/})
   \item ds9 (\url{http://ds9.si.edu/site/Home.html})
   \item xpatools
 \end{itemize}
 
 A labor során piszkéstetői archív mnéréseket fogunk feldolgozni. A méréseket,
 illetve a laborhoz szükséges szkripteket, fájlokat a labor honlapjáról lehet
-letölteni: TBD
+letölteni:
+\url{https://konkoly.hu/staff/szakats.robert/}
 
 A felsorolt szoftvereket próbáljuk meg még a laobor előtt feltelepíteni.
 Egy részük (bash, awk, gnuplot) sok esetben már az alaprendszerrel feltelepül.
@@ -38,18 +45,44 @@ Tömörítsük ki a data.tar.bz2 fájlt:
   tar -xvf data.tar.bz2
 \end{verbatim}
 
-A szkriptek közül az imexam-ot másoljuk át a \$HOME/bin/ mappába és tegyük
-végrehajthatóvá:
+
+Az {\it imexam} és a {\it tvmark} szkripteket másoljuk át a \$HOME/bin/ mappába
+és tegyük végrehajthatóvá:
 \begin{verbatim}
   chmod +x imexam
 \end{verbatim}
 
-Ha még nem lenne benne a \$HOME/.bashrc-ben a következő sor, akor írjuk bele:
+
+Ha még nem lenne benne a \$HOME/.bashrc-ben a következő sor, akkor írjuk bele:
 \begin{verbatim}
   export PATH="$PATH:$HOME/bin/"
 \end{verbatim}
 
 \section{Bevezetés}
+
+A labor során egy pulzáló változócsillagról (XX Cyg) készült méréseket fogjuk
+feldolgozni. A mérések a piszkéstetői Schmidt távcsővel készültek.
+
+Linuxos környezetben fogunk dolgozni, így az alapvető linuxos parancsok és
+valamilyen ismertebb linux alapszintű felhasználói ismerete előny.
+
+A feldolgozás során elvégezzük az alapvető képkorrekciókat, úgy mint bias, dark
+és flat, majd megcsináljuk a fotometriát (fényességmérés) és végül ábrázoljuk a
+csillag fénygörbéjét, azaz a (jelen esetben relatív) fényességváltozását az idő
+függvényében.
+Végül pedig házi feladat keretében a jegyzőkönyvnek kell elkészülnie.
+
+Az alpvető képkorrekciókról és a CCD kamerák működéséről a feltöltött
+{\it ccd.pdf}-ből készüljünk fel.
+
+Az apertúra fotometriához jó bevezető a következő dokumentum:
+\url{http://web.ipac.caltech.edu/staff/fmasci/home/astro_refs/aperture_phot2.pdf}
+
+A többi használt szoftverhez az előző fejezetben található linkeken lehet
+információt szerezni.
+
+A következő feladatok során a parancsok kiadása minden esetben linux
+parancssorban történik, kivéve ott, ahol ez jelezve van.
 
 \section{Fits fájlok kezelése}
 
@@ -112,10 +145,17 @@ Kulcsszavak:
 
 
 A képek megjelenítéséhez a ds9 nevű programot fogjuk használni.
-Nyissunk meg egy objektumképet a ds9-ben:
+Nyissunk meg egy objektumképet a ds9-ben. Írjuk pe a parancssorba:
 \begin{verbatim}
   ds9 XX_Cyg-20181012_0001_R.fits -scale zscale&
 \end{verbatim}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{pics/object.png}
+    \caption{Megnyitott objektumkép a ds9-ben.}
+    \label{objds9}
+\end{figure}
 
 Láthatjuk, hogy a képen rengeteg csillag található. A zoom menüben zoomolhatunk,
 vagy az egérgörgővel is. A felvételek a Schmidt távcsővel készültek, aminek a
@@ -124,7 +164,7 @@ fok átmérőjű.
 A képen látszanak még hibás pixel oszlopok, amik a kamera elöregedése miatt
 jelentek meg. Ezeknek a nagy részét remélhetőleg a bias és dark korrekció
 kiszedi majd.
-Ha már fut a ds9, akkor a File menüben mgnyithatunk másik fits fájlt is.
+Ha már fut a ds9, akkor a File menüben megnyithatunk másik fits fájlt is.
 
 {\bf Feladat:}
 Hasonlítsuk össze a bias, dark, flat és objektumképeket.
@@ -148,7 +188,7 @@ Mint láttuk, a nyers csillagászati felvételek nem alkalmasak tudományos mér
 elvégzésére. Ehhez először az alapvető képredukciós lépéseket kell megtennünk,
 azaz a bias, dark és flat korrekciót.
 Nagyon fontos, hogy az eredeti fájlokat ne írjuk felül!
-Ehhez hozzuk létre az alábbi alkönyvtárakat:
+Ehhez hozzuk létre az alábbi alkönyvtárakat a munkakönyvtárunkban:
 \begin{itemize}
   \item master
   \item reduced
@@ -182,7 +222,7 @@ oszlop az imagetyp kulcsszó értéke, míg az első a fájlnév. Az awk a \$1, 
 stb. módon hivatkozik az oszlopok sorszámára. A számozás egytől indul. A \$0 a
 teljes sort kiíratja.
 
-Ez a simán a konzolba írja ki a fájlokat, de nekünk most jobb lenne egy
+Ez simán a konzolba írja ki a fájlokat, de nekünk most jobb lenne egy
 változóban eltárolni őket.
 
 Bash változónak a következő módon adhatunk értéket:
@@ -226,6 +266,13 @@ Majd létrehozzuk a master bias képet:
   ficombine $rbiaslist --mode median -o master/BIAS.fits
 \end{verbatim}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{pics/biascomp.png}
+    \caption{Nyers bias kép és a master bias összehasonlítása.}
+    \label{biascomp}
+\end{figure*}
+
 Itt az előző lépésben korrigál fájlokból létrehozza az átlagolt master bias
 képet. Bias és dark képeknél a sima átlag is jó, de flatnél mindenképpen medián
 átlagot vegyünk.
@@ -238,6 +285,7 @@ Kitörölhetjük az ideiglenes fájlokat:
 {\bf Feladat:}
 Nyissuk meg ds9-ben a master bias-t és egy másik frame-ben egy sima bias képet.
 Hasonlítsuk őket össze. Tapasztalatainkat írjuk le a jegyzőkönyvbe.
+
 
 \subsection{Master dark}
 
@@ -296,7 +344,7 @@ irányítás nélkül is. Mit ír ki így a konzolba a parancs?
 Nézzük meg az awk parancsot is. Itt két újdonsággal találkozunk. Egyrészt, egy
 külső, azaz bash változót hozzárendelünk egy awk belső változóhoz, a -v
 kapcsolóval. Ezek után egy többszörös feltétel jön, amit a \&\&-sel adunk meg.
-Itt azt mondjuk az awk-nak, hogy a bemenetére érkező imputból csak azokat a
+Itt azt mondjuk az awk-nak, hogy a bemenetére érkező inputból csak azokat a
 sorokat írja ki, amiknél a második oszlop értéke dark, a harmadiké pedig a külső
 változóból definiált exp. idő értékével egyezik meg.
 Ezek után a már ismert ficalib és ficombine taskokat használjuk. Itt a dark
@@ -313,6 +361,13 @@ el a master bias és master dark képeket ezen a módon.
 Jelenítsük meg az egyik master darkot a ds9-ben, majd hasonlítsuk össze egy
 nyers dark képpel. Mit tapasztalunk? Írjuk le a tapasztalatainkat a
 jegyzőkönyvbe.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{pics/darkcomp.png}
+    \caption{Nyers dark kép és a master dark összehasonlítása.}
+    \label{biascomp}
+\end{figure}
 
 \subsection{Master flat}
 
@@ -334,7 +389,7 @@ A következő extra kapcsolóra még szükség lesz a ficalib parancsba:
 \end{verbatim}
 Ezzel azonos szintre normáljuk az összes flat képünket. Erre főleg sky flatek
 esetén van szükség, ahol az egyes flat képek intenzitása jelentősen eltérhet,
-és ha nem skálázzuk össze a felvételeket, akor az esetlegesen látszó csillagokat
+és ha nem skálázzuk össze a felvételeket, akkor az esetlegesen látszó csillagokat
 vagy csillag csíkokat nem szedi ki jól a medián átlag.
 
 Ha elkészültek a szaturáció, gain, bias és dark korrigált flat képeink, aklor a
@@ -349,7 +404,7 @@ Nyissuk meg a master flat fájlunkat a ds9-ben. Hasonlítsuk össze egy nyers fl
 fájllal. Írjuk le a tapasztalatainkat a jegyzőkönyvbe.
 
 
-\subsection{Az objektum képek feldolgozása}
+\subsection{Az objektumképek feldolgozása}
 
 Amikor kész vagyunk az összes szükséges kalibrációs kép létrehozásával, akkor
 korrigálhatjuk az objektum képeinket is. A sztenderd lépéseken kívül még le
@@ -426,10 +481,10 @@ kódot a Registration részből.
 \end{verbatim}
 
 Itt egy újabb linuxos paranccsal ismerkedünk meg, a sed-del. Ez egy nagyon
-sokrétű program, mi most az egyik alapfunkcióját fogjuk felhasználni, azaz egy
-a bemenő sorokban egy adott string-et kicserélünk egy másikra. Jelen esetben a
+sokrétű program, mi most az egyik alapfunkcióját fogjuk felhasználni, azaz a
+bemenő sorokban egy adott string-et kicserélünk egy másikra. Jelen esetben a
 .fits végződést cseréljük ki a semmire, mivel a szkript kiterjesztés nélkül
-várja tőlünk a bemenetet.
+várja tőlünk a bemeneteti neveket.
 
 Írjuk át a következőket:
 \begin{verbatim}
@@ -438,14 +493,14 @@ várja tőlünk a bemenetet.
   --flux-threshold 10000
 \end{verbatim}
 
-Mit tesz ez a fájl? Létrehoz egy új kyönvtárat, astrom néven, majd létrehozza a
+Mit tesz ez a fájl? Létrehoz egy új könyvtárat, astrom néven, majd létrehozza a
 bemeneti listafájlt. Ezek után ez a bemenet egy while ciklusba kerül be, ami
 minden egyes elemen végigmegy. A cikluson belül a fistar megekeresi nekünk a
 bemeneti képen a csillagokat, majd ez kiírsára kerül egy megfelelően formázott
 fájlba az astrom mappában.
 A --flux-threshold kapcsolóval azt tudjuk állítai, hogy milyen halvány
 forrásokat keressen a program. Minél kisebbre  állítjuk, annál halványabb
-csillagokat találmeg. A jelenlegi 10000-es értékkel kb. 100 csillagot fog
+csillagokat talál meg. A jelenlegi 10000-es értékkel kb. 100 csillagot fog
 megtalálni minden képen.
 
 Mentsük el a fájlt, majd tegyük futtathatóvá. Futassuk le:
@@ -466,6 +521,13 @@ A megtalált csillagokat a tvmark szkript segítségével plottoljuk fel:
 \begin{verbatim}
   tvmark -x 2,3 -l 1 XX_Cyg-20181012_0001_R.stars
 \end{verbatim}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{pics/tvmark.png}
+    \caption{A megtalált csillagok.}
+    \label{stars}
+\end{figure}
 
 A -x kapcsolóval azt mondjuk meg, hogy a bemenő adatfájlban melyik két oszlop
 az x,y koordináta, a -l kapcsolóval pedig, hogy melyik oszlop tartalmazza a
@@ -526,19 +588,23 @@ fényességük nem változik időben.
 \subsection{Az XX Cyg azonosítása}
 
 Eddig nem foglalkoztunk azzal a kérdéssel, hogy hol van pontosan a változónk a
-felvételeken. Jóhiszeműen feltételeztük, hogy a felvételek jók és a csilalg
+felvételeken. Jóhiszeműen feltételeztük, hogy a felvételek jók és a csillag
 valahol a képek közepe felé található. Ahhoz, hogy meg tudjuk mérni a célpont
 fényességét egyértelműen azonosítanunk kell.
 
 Keressük fel a következő oldalt:
-\url{http://simbad.u-strasbg.fr/simbad/}
+\url{http://simbad.u-strasbg.fr/simbad/} A "Queries" ablakban kattintsunk a
+"Basic search"-re. Írjuk be: XX Cyg
 
-A "Queries" ablakban kattintsunk a "Basic search"-re.
-
-Írjuk be: XX Cyg
+\begin{figure*}[!ht]
+    \centering
+    \includegraphics[width=0.6\linewidth]{pics/dss.png}
+    \caption{Az ESO DSS-ben az XX Cyg környezete.}
+    \label{dss}
+\end{figure*}
 
 Ha entert nyomunk, a Simbad adatbázisban a keresett csillag oldalára jutunk.
-Itt számtalan informácüt találunk, többek között az égi koordinátáit, a
+Itt számtalan informácót találunk, többek között az égi koordinátáit, a
 körülbelüli fényességét különböző szűrőkben és az egyéb azonosítóit.
 
 Mivel a mi képeink nincsenek betranszformálva csillagászati koordináta
@@ -548,10 +614,10 @@ Az első lehetőség, hogy az oldal jobb oldalán az "Interactive AladinLite vie
 ablakban megnézzük, hogy hogyan néz ki a célpont környezete, majd a ds9-ben
 megnyitva egy képet megpróbáljuk megtalálni. Az AladinLite ablakocskában a
 görgővel lehet ki-be zoomolni.
-Tipp: Technikai okokból a Schmidt kamerája,a mivel ezek a felvételek készültek,
+Tipp: Technikai okokból a Schmidt kamerája, amivel ezek a felvételek készültek,
 nem irányhelyesen mutatja az eget. Hogy úgy lássuk, menjünk a ds9-ben a Zoom
-menübe, majd kattintsuk be az Invert XY részt és a 90 degrees részt. Így már
-irányhelyesen fogjuk látni a felvételt.
+menübe, majd kattintsuk be az {\it Invert XY} részt és a {\it 90 degrees} részt.
+Így már irányhelyesen fogjuk látni a felvételt.
 
 Másik lehetőség, hogy elmegyünk a \url{https://archive.eso.org/dss/dss} oldalra.
 Kimásoljuk a Simbad olalról a csillag ICRS koordinátáit, majd az első három
@@ -559,16 +625,17 @@ számot (hh mm ss) bemásoljuk a R.A. boxba, a második hármat pedig a Dec. box
 Az Image Size sorba beírunk 10-10-et, alul a legördülő menüben pedig beállítjuk,
 hogy Display as GIF file.
 
+
 Ha megvan a csillag, akkor tvmark-kal plottoljuk fel az első képünkön megtalált
 csillagokat és jegyezzül fel a célpont sorszámát.
 
 Ezek után válasszunk még 6 öszehasonlító csillagot.
 A jó összehasonlító:
 \begin{itemize}
-  \item Kb. hasonló fényes, mint a célpont.
   \item Nincs túl távol a célponttól.
   \item Nem szaturált.
   \item Magányos, azaz a közvetlen közelében nincsenek más csillagok.
+  \item A fényessége nagyságrendileg hasonló, mint a változóé.
 \end{itemize}
 
 Jegyezzük fel a hat összehasonlítónk sorszámát.
@@ -578,13 +645,13 @@ pixelkoordinátáival. A koordinátákat az első képhez tartozó .stars fájlb
 vegyük. Formátum:
 
 \begin{verbatim}
-  XX_Cyg x y
-  Comp1 x y
-  Comp2 x y
-  Comp3 x y
-  Comp4 x y
-  Comp5 x y
-  Comp6 x y
+  XX_Cyg px0 py0
+  Comp1 px1 py1
+  Comp2 px2 py2
+  Comp3 px3 py3
+  Comp4 px4 py4
+  Comp5 px5 py5
+  Comp6 px6 py6
 \end{verbatim}
 
 Mentsük el a fájlt phot.list néven. Plottoljuk fel a kiválasztott csillagokat
@@ -593,12 +660,36 @@ szintén rakjuk bele a jegyzőkönyvbe.
 
 \subsection{Apertúra fotometria}
 
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.7\linewidth]{pics/radialprofil.png}
+    \caption{Radiális profil imexam-mal.}
+    \label{radialp}
+\end{figure*}
+
 Az apertúra fotometria lényege, hogy lerakunk a képre egy a csillagra centrált
 aprtúrát (kört) és azon belül megmérjük a fluxust. Ez után lerakunk a csillag
 köré egy gyűrűt, amiben megmérjük az égi hátteret és ezt levonjuk a csillagon
 mért fluxusból, a csillag területére arányosítva.
 Ez a módszer jól működik nem túl zsúfolt csillagmezőkön, illetve akkor is, ha
 valamiért a csillagok profilja nem tökéletes, vagy a távcső defókuszált.
+
+\begin{figure}[ht!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{pics/surface.png} % first figure itself
+        \caption{Felületi plot.}
+        \label{surfaceplot}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{pics/area.png} % second figure itself
+        \caption{Kontúr plot}
+        \label{areap}
+    \end{minipage}
+\end{figure}
 
 Hátránya, hogy sűrű területeken az egymásba lógó és sűrűn elhelyezkedő
 csillagok miatt nem ad jó erdeményt. Ebben az esetben PSF fotometriát kell
@@ -607,7 +698,7 @@ Mi ez utóbbi módszert relatíve bonyolult természete miatt nem fogjuk haszná
 valamint azért sem, mert a mi esetünkben a csillagaink kellően távol
 helyezkednek el egymástól.
 
-A megfelelő aprtúra és égi gyűrű kiválasztása saosem egyszerű feladat. Támpont
+A megfelelő aprtúra és égi gyűrű kiválasztása soha sem egyszerű feladat. Támpont
 lehet a csillagprofilok félértékszélessége (FWHM). Csillagaink egy Moffat
 függvénnyel (vagy egy Gauss-os alakkal) jól közelíthető profillal rendelkeznek.
 Vizsgáljuk meg őket közelebbről!
@@ -615,14 +706,16 @@ Vizsgáljuk meg őket közelebbről!
 {\bf Feladat:}
 Nyissunk meg egy összetolt képet ds9-ben. Indítsuk el az imexam taskot.
 Ha a ds9-re visszük a kurzort láthatjuk, hogy megváltozott. Keressünk egy
-kellően fényes csillagot, vigyük a közepére a kurzort, majd nyomjuk meg az r
-gombot. Ekkor a csillagprofil radiális plotját láthatjuk. Az s betűt lenyomva
-egy felületi plotot látunk, az e betűvel pedig egy kontúr plotot láthatunk.
+kellően fényes csillagot, vigyük a közepére a kurzort, majd nyomjuk meg az
+{\it r} gombot. Ekkor a csillagprofil radiális plotját láthatjuk. Az {\it s}
+betűt lenyomva egy felületi plotot látunk, az {\it e} betűvel pedig egy kontúr
+plotot láthatunk.
 
 A radiális plot esetén felül látunk egy becsült félértékszélesség értéket.
 Ezt mérjük meg 10 csillagra, majd átlagoljuk és jegyezzük fel ezt a számot.
 Vigyázzunk, hogy a csillagok ne legyenek szaturáltak és hogy magányosak
 legyenek.
+
 
 Hogy ki tudjuk választani a megfelelő apertúrát, több különböző értékre is
 lefuttatjuk a fotometriát. Szerencsére a FITSH fiphot csomagja ezt kényelmes
@@ -645,6 +738,13 @@ while read base dummy ; do
 done
 \end{verbatim}
 
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.6\linewidth]{pics/aperture.png}
+    \caption{Példa apertúra és égi gyűrű egy csillag körül.}
+    \label{apert}
+\end{figure*}
+
 Ahol az apertures ... részt helyettesítsük a következő módon:
 A kiszámolt átlagos félértékszélességet kerekítsük fel egészre, majd egyesével
 növeljük az értékét öt lépésen keresztül. Így lesz 6 számunk, ami az apertúra
@@ -664,6 +764,19 @@ Figyeljük meg, hogy az égi gyűrű mérete mindegyik aprtúrához ugyan akkora
 Futassuk le a phot.sh-t és nézzük meg a keletkezett fájlokat a phot mappában.
 Milyen a fájlok szerkezete? Tipp: nézzük meg a szkriptben a fiphot parancs
 --format kapcsolója után megadott formátumot.
+
+
+{\bf Extra opcionális feladat:}
+Ha nagyon pontos fotometriát akarunk, akkor az összetolt képeken érdemes
+újracentrálni (azaz megkeresni a közepét) a fotometrálandó csillagainknak,
+ugyanis a képek regisztrációja nem 100\%-ig pontos, tehát a gyakorlatban egy
+nagyon picit minden csillag máshol van, mint a referencia képen. A mi
+esetünkben ez most nem gond, de általában érdmes ezt megtenni.
+Ha valaki érez magában erőt, akkor írjon egy szkriptet, ami minden összetolt
+képen újracentrálja a mérendő csillagokat és ezeket a centrált pixel
+kooordinátákat használja majd fel az aktuális fotometriához. Ha valakin így
+tesz, akkor ehhez a fenti szkriptet is módosítania kell.
+
 
 {\bf Feladat:}
 Ellenőrizzük le az apertúrákat.
@@ -715,16 +828,60 @@ kulcsszóban.
 {\bf Feladat:}
 Próbáljuk meg magunktól létrehozni a végső adatfájlt a fent látott formátumban.
 
-
 \subsection{Differenciális fotometria}
 
 A következőkben a csillagunk fénygörbéjét fogjuk előállítani. Hogy kinek melyik
 összehasonlító lesz jó a végén, az nagyban függ az egyénileg kiválasztott
 csillagoktól.
 
-Először plottoljuk fel a változó fényességét az első összehasonlítóhoz képest.
+{\bf Feladat:}
+Először plottoljuk fel a változó fényességét az első összehasonlítóhoz képest a
+gnuplotban.
 
+\begin{verbatim}
+  set yrange [] rev
+  plot 'XX_Cyg.data' u ($1-2450000):($2-$4)
+\end{verbatim}
+A Julián dátumból a kényelmesebb leolvashatóság kedvéért vontuk le a 2450000-t.
 
+Mit látunk? Próbáljuk meg a többi összehasonlítóval is ábrázolni a
+differenciális fénygörbét.
+
+Ha megvan a szerintünk legjobbnak gondolt összehasonlító, akkor el kell
+végeznünk egy tesztet, hogy a csillag nem változó-e. Mivel csak szemre
+választottunk csillagokat és nem ellenőriztük csillagkatalógusból a forrásokat,
+ezért ebben nem lehetünk biztosak.
+
+{\bf Feladat:}
+Plottoljuk fel a kedvenc összehasonlítónkat a többi összehasonlítóhoz képest.
+Mit látunk? Változik-e az összehasonlító? Ha igen, akkor keressünk egy olyat,
+amelyik nem. Ezt is ellenőrizzük le több másik összehasonlítóval.
+
+\begin{figure*}[ht!]
+    \centering
+    \includegraphics[width=0.65\linewidth]{pics/lc.png}
+    \caption{Az XX Cyg fénygörbéje és a comp-check.}
+    \label{apert}
+\end{figure*}
+
+Ha megvan a legjobb összehasonlító, ami nem változó, akkor készítsük el a
+végső plotot. Adjunk címet az ábrának, feliratozzuk a tengelyeket, a
+jelmagyarázatba írjunk értelmes szöveget és a változónk fénygörbéje alá
+plottoljuk fel az úgynevezett comp-check-et is, azaz a használt összehasonlító
+fényessége mínusz egy másik összehasonlító. Plottoljuk fel a hibákat is!
+Az ábrát rakjuk bele a jegyzőkönyvbe.
+Segítség:
+\url{http://lowrank.net/gnuplot/plot2-e.html}
+
+Becsüljük meg a csillag peak-to-peak amplitúdóját. Becsüljünk hibát is.
+Írjuk bele a jegyzőkönyvbe az eredményt.
+
+\section{Jegyzőkönyv}
+
+A jegyzőkönyvet a labor alatt elvégzett munkáról kell megírni, pár oldal
+terjedelemben. Mindenkitől külön jegyzőkönyvet várunk. A jegyzőkönyv várt
+formátuma pdf. A végső jegyzőkönyvet a labor után maximum 1-2 héttel kell
+elküldeni a laborvezetőknek értékelésre.
 
 %\begin{figure}
 %    \centering
