@@ -5,19 +5,19 @@
 \usepackage{geometry}
 \usepackage{mwe}
 \usepackage[hungarian]{babel}
+\usepackage{upquote}              % for proper verbatim characters
 
 \textwidth=450pt
 \begin{document}
 
 \title{ELTE Haladó labor, Piszkéstető}
-\author{Szakáts Róbert}
+\author{Szakáts Róbert, Sódor Ádám}
 
 \maketitle
 \tableofcontents
 \newpage
 
 \section{Előfeltételek}
-
 \begin{itemize}
   \item Saját otthoni gépen futó, modern linux operációs rendszer, pl. Debian 10.
   \item bash (\url{http://www.tldp.org/LDP/Bash-Beginners-Guide/html/})
@@ -25,15 +25,15 @@
   \item Gnuplot (\url{http://www.gnuplot.info/})
   \item awk (\url{https://www.linuxtechi.com/awk-command-tutorial-with-examples/})
   \item ds9 (\url{http://ds9.si.edu/site/Home.html})
-  \item xpatools
+  \item xpatools (\url{http://hea-www.harvard.edu/saord/xpa/})
 \end{itemize}
 
-A labor során piszkéstetői archív mnéréseket fogunk feldolgozni. A méréseket,
+A labor során piszkéstetői archív méréseket fogunk feldolgozni. A méréseket,
 illetve a laborhoz szükséges szkripteket, fájlokat a labor honlapjáról lehet
 letölteni:
 \url{https://konkoly.hu/staff/szakats.robert/}
 
-A felsorolt szoftvereket próbáljuk meg még a laobor előtt feltelepíteni.
+A felsorolt szoftvereket próbáljuk meg még a labor előtt feltelepíteni.
 Egy részük (bash, awk, gnuplot) sok esetben már az alaprendszerrel feltelepül.
 A {\bf{FITSH}} telepítése a honlapján elég jól le van írva, illetve bizonyos
 disztribúciókban (pl. Debian) elérhető repóból is, mint ahogy a ds9 is.
@@ -61,8 +61,7 @@ Ha még nem lenne benne a \$HOME/.bashrc-ben a következő sor, akkor írjuk bel
 \section{Bevezetés}
 
 A labor során egy pulzáló változócsillagról (XX Cyg) készült méréseket fogjuk
-feldolgozni. A mérések a piszkéstetői Schmidt távcsővel készültek, FLI PL 16801
-kamerával.
+feldolgozni. A mérések a piszkéstetői Schmidt távcsővel készültek.
 
 Linuxos környezetben fogunk dolgozni, így az alapvető linuxos parancsok és
 valamilyen ismertebb linux alapszintű felhasználói ismerete előny.
@@ -73,7 +72,7 @@ csillag fénygörbéjét, azaz a (jelen esetben relatív) fényességváltozás�
 függvényében.
 Végül pedig házi feladat keretében a jegyzőkönyvnek kell elkészülnie.
 
-Az alpvető képkorrekciókról és a CCD kamerák működéséről a feltöltött
+Az alapvető képkorrekciókról és a CCD kamerák működéséről a feltöltött
 {\it ccd.pdf}-ből készüljünk fel.
 
 Az apertúra fotometriához jó bevezető a következő dokumentum:
@@ -90,8 +89,8 @@ parancssorban történik, kivéve ott, ahol ez jelezve van.
 Ebben a feladatban megismerkedünk a fits fájlformátummal és hogy hogyan tudunk
 ezekből a fájlokból információt kinyerni, illetve hogyan tudjuk megjeleníteni.
 
-Mega a formátum a Flexible Image Transport System rövidítése. Ez egy standard,
-digitális formátum, amelyben adatokat tudunk tárolni. Ez lehet kép inforánmció
+Maga a formátum a Flexible Image Transport System rövidítése. Ez egy standard,
+digitális formátum, amelyben adatokat tudunk tárolni. Ez lehet kép információ
 is, de táblázat is. Akár több dimenziós, úgynevezett datacube-ok is lehetnek
 fits fájlokban.
 
@@ -171,8 +170,8 @@ Ha már fut a ds9, akkor a File menüben megnyithatunk másik fits fájlt is.
 Hasonlítsuk össze a bias, dark, flat és objektumképeket.
 A ds9 Frame menüjében nyithatunk új frame-et. Ezek mindegyikáben egy-egy külön
 fits fájlt tudunk megjeleníteni. Váltani köztük a TAB gomb lenyomásával tudunk.
-Nyisuk meg külön framekben az előző feladatban szereplő fájlokat. Írjuk le a
-szemmel végzett összehasonlítások tapasztalatait. Csináljunk képkeket a
+Nyissuk meg külön framekben az előző feladatban szereplő fájlokat. Írjuk le a
+szemmel végzett összehasonlítások tapasztalatait. Csináljunk képeket a
 jegyzőkönyvbe:
 File - Save image - PNG...
 
@@ -206,7 +205,7 @@ változó képében.
 
 A fájlokat a fejlécek alapján fogjuk szétválogatni. Sajnos a gyakorlati
 tapasztalat azt mutatja, hogy a fájlnevek nem mindig utalnak a mérés típusára.
-A mi esetünkben ez nem így van szerencsére, de minden esetre most a biztosabb
+A mi esetünkben ez nem így van szerencsére, de mindenesetre most a biztosabb
 megoldást fogjuk használni.
 
 Adjuk ki a következő parancsot ott, ahol a fájljaink vannak:
@@ -242,7 +241,7 @@ dolgozni.
 Mivel nem akarjuk felülírni az eredeti fájljainkat, hozzunk létre az ideiglenes
 fájloknak is egy listát. Ezeket nyugodtan létrehozhatjuk a /tmp mappában,
 ahonnan később törlésre kerülnek majd.
-Eegyesével macerás lenne ezt megcsinálni, ezért a bash-ben lévő for ciklust
+Egyesével macerás lenne ezt megcsinálni, ezért a bash-ben lévő for ciklust
 fogjuk használni:
 
 \begin{verbatim}
@@ -290,10 +289,10 @@ Hasonlítsuk őket össze. Tapasztalatainkat írjuk le a jegyzőkönyvbe.
 
 \subsection{Master dark}
 
-A következő lépés a master dark(ok) elékszítése. Jelen esetben két expozíciós
+A következő lépés a master dark(ok) elkészítése. Jelen esetben két expozíciós
 idejű darksorozatunk is van. Egy a flat képekhez, egy pedig az objektumképekhez.
 Mindkét expozíciós időhöz készítünk master darkot. Elméletileg erre nem
-feltétlenül van szükség, ugyanis ha a kamera hőmérséklete ugyan az volt minden
+feltétlenül van szükség, ugyanis ha a kamera hőmérséklete ugyanaz volt minden
 esetben, akkor másik expozíciós időhöz át tudunk skálázni dark képeket, ugyanis
 az idővel a sötétáram lineárisan nő adott hőmérsékleten.
 
@@ -301,7 +300,7 @@ Készítsük el a listákat. Ezt most két lépésben fogjuk megtenni.
 
 {\bf Feladat:}
 Először szedjük össze a dark méréseket az előző feladatban alkalmazott módon.
-A fájlok neveit ároljuk el egy bash változóban, aminek legyen a neve darklist.
+A fájlok neveit tároljuk el egy bash változóban, aminek legyen a neve darklist.
 
 Szedjük össze az egyedi expozíciós időket:
 \begin{verbatim}
@@ -309,7 +308,7 @@ Szedjük össze az egyedi expozíciós időket:
   --format value | sort -u)
 \end{verbatim}
 
-Megejgyzés: A fenti parancsban a sort linux parancsot használtuk, ami sorba
+Megjegyzés: A fenti parancsban a sort linux parancsot használtuk, ami sorba
 rendezi a bemenetére érkező értékeket. A -u kapcsolóval pedig azt mondtuk meg
 neki, hogy a végén csak ez egyedi (unique) értékeket írja ki.
 
@@ -325,17 +324,17 @@ expozíciós időket:
     echo "Master dark készítése "$de"s expozíciós idővel."
     mdname="mdark${de}.fits"
     dlist=$(fiheader *.fits --get imagetyp,exptime \
-    --format filename,list | \
-    awk -v exptime="$de" '($2=="dark")&&($3==exptime){print $1}')
+      --format filename,list | \
+      awk -v exptime="$de" '($2=="dark")&&($3==exptime){print $1}')
     rdarklist=`for j in $dlist;do echo "/tmp/r"$j;done`
     ficalib -i $dlist --input-master-bias master/BIAS.fits \
-    --saturation 46000 --gain 1.7 -o $rdarklist
+      --saturation 46000 --gain 1.7 -o $rdarklist
     ficombine $rdarklist --mode median -o master/$mdname
     rm /tmp/r*.fits
 done
 \end{verbatim}
 
-Mi történik a fenti cilkusban? Először is, a de változó minden ciklusban
+Mi történik a fenti ciklusban? Először is, a de változó minden ciklusban
 felveszi a következő értéket a darkexps változónkból. Majd kiíratjuk az echo
 parancs segítségével, hogy melyik expozíciós idejű master darkot készítjük el.
 Ezek után létrehozzuk az adott exp. időhöz tartozó listát. Próbáljuk meg a 4.
@@ -343,13 +342,13 @@ sorban lévő parancsot értékadás nélkül kiadni. Próbáljuk ki az awk para
 irányítás nélkül is. Mit ír ki így a konzolba a parancs?
 
 Nézzük meg az awk parancsot is. Itt két újdonsággal találkozunk. Egyrészt, egy
-külső, azaz bash változót hozzárendelünk egy awk belső változóhoz, a -v
+külső, azaz bash változót hozzárendelünk egy awk belső változóhoz, a \verb+-v+
 kapcsolóval. Ezek után egy többszörös feltétel jön, amit a \&\&-sel adunk meg.
 Itt azt mondjuk az awk-nak, hogy a bemenetére érkező inputból csak azokat a
 sorokat írja ki, amiknél a második oszlop értéke dark, a harmadiké pedig a külső
 változóból definiált exp. idő értékével egyezik meg.
 Ezek után a már ismert ficalib és ficombine taskokat használjuk. Itt a dark
-fájljainkat bias korrigáljuk az összeátlagoslás előtt. Erre a mi esetünkben nem
+fájljainkat bias korrigáljuk az összeátlagolás előtt. Erre a mi esetünkben nem
 feltétlenül lenne szükség, ugyanis a nyers dark tartalmazza a bias-t is. Így, ha
 minden expozíciós időhöz van darkunk, akkor elég lenne csak ezeket
 összekombinálni, bias levonás és a master bias elkészítése nélkül. Viszont, ha
@@ -366,8 +365,8 @@ jegyzőkönyvbe.
 \begin{figure}
     \centering
     \includegraphics[width=0.8\linewidth]{pics/darkcomp.png}
-    \caption{Nyers dark kép és a master dark összehasonlítása.}
-    \label{biascomp}
+    \caption{A master dark és egy nyers dark kép összehasonlítása.}
+    \label{darkcomp}
 \end{figure}
 
 \subsection{Master flat}
@@ -377,17 +376,15 @@ bias és dark korrigáljuk átlagolás előtt.
 
 {\bf Feladat:}
 Az előző pontok és az eddigi tudásunk alapján készítsük el a master flat fájlt.
-Normál esetben minden mérésehez használt szűrőhöz külön master flat-et kell
+Normál esetben minden méréshez használt szűrőhöz külön master flat-et kell
 készíteni. Jelen esetben csak R szűrős képek állnak a rendelkezésünkre, így elég
 ehhez elkészíteni a megfelelő fájlt.
+
 {\bf Segítség}:
 Figyeljünk arra, hogy a megfelelő expozíciós idejű dark fájlt használjuk a
-korrekcióhoz! Ennek a dark korrekció kapcsolója a --input-master-dark.
+korrekcióhoz! Ennek a dark korrekciónak a kapcsolója az \verb+--input-master-dark+.
 
-A következő extra kapcsolóra még szükség lesz a ficalib parancsba:
-\begin{verbatim}
-  --post-scale 20000
-\end{verbatim}
+Szükség lesz még a \verb+--post-scale 20000+ extra kapcsolóra a ficalib parancsban.
 Ezzel azonos szintre normáljuk az összes flat képünket. Erre főleg sky flatek
 esetén van szükség, ahol az egyes flat képek intenzitása jelentősen eltérhet,
 és ha nem skálázzuk össze a felvételeket, akkor az esetlegesen látszó csillagokat
@@ -414,7 +411,7 @@ ekkora látómezőre és így helyet és számolási kapacitást spórolhatunk a
 későbbiekben.
 
 {\bf Feladat:}
-Hozzuk létre az objektum fájlok nevét tartalmazó bash változót. Figyeljünk rá,
+Hozzuk létre az objektumfájlok nevét tartalmazó bash változót. Figyeljünk rá,
 hogy a fájlok a korábban létrehozott reduced mappába kerüljenek.
 
 A kalibrációt a következő paranccsal tudjuk végrehajtani:
@@ -423,19 +420,19 @@ A kalibrációt a következő paranccsal tudjuk végrehajtani:
   for FILE in $objectlist;do
       echo $FILE "feldolgozása."
       ficalib -i $FILE --input-master-bias master/BIAS.fits \
-      --input-master-dark  master/mdark30.fits \
-      --input-master-flat master/flatR.fits \
-      --saturation 46000 --gain 1.7 -o /tmp/$FILE
+        --input-master-dark  master/mdark30.fits \
+        --input-master-flat master/flatR.fits \
+        --saturation 46000 --gain 1.7 -o /tmp/$FILE
       ficalib -i /tmp/$FILE --image 1400:1400:2650:2650 \
-      --trim -o reduced/$FILE
+        --trim -o reduced/$FILE
       rm /tmp/$FILE
   done
 \end{verbatim}
 
 Mi történik? A ficalib elvégzi a bias, dark, flat és a szaturáció, valamint a
 gain korrekciót. Ennek kimenetét egy ideiglenes fájlba mentjük, majd egy újabb
-ficalib parancs elvégzi a szükséges trimmelést. Itt a --image kapcsolóval a
-megmaradó rész pixelkoordinátáit adjuk meg x1:x2:y1:y2 formában, a --trim pedig
+ficalib parancs elvégzi a szükséges trimmelést. Itt az \verb+--image+ kapcsolóval a
+megmaradó rész pixelkoordinátáit adjuk meg x1:x2:y1:y2 formában, a \verb+--trim+ pedig
 levágja az  ezen kívül eső részeket.
 
 {\bf Feladat:}
@@ -470,7 +467,7 @@ Látogassunk el a következő oldalra:
 \url{https://fitsh.net/wiki/Example:A_composite_image_of_the_M74_galaxy}
 
 A kedvenc text editorunkkal (nano, pico, vi, gedit, pluma, etc.) hozzunk létre
-egy üres fájlt stars.sh néven a munkakönyvtárunkban, majd másoljuk bele az első
+egy üres fájlt \verb+stars.sh+ néven a munkakönyvtárunkban, majd másoljuk bele az első
 kódot a Registration részből.
 
 Írjuk bele a következőket:
@@ -512,12 +509,12 @@ Mentsük el a fájlt, majd tegyük futtathatóvá. Futassuk le:
 
 {\bf Feladat:}
 Amint lefutott a szkript, nyissuk meg az első fits fájlt a reduced mappából,
-majd az astrom mappába lépve nézzük meg a XX\_Cyg-20181012\_0001\_R.stars fájl
+majd az astrom mappába lépve nézzük meg a \verb+XX\_Cyg-20181012\_0001\_R.stars+ fájl
 tartalmát. Ebben a fájlban láthatjuk a megtalált csillagok azonosítóját (első
 oszlop), az x,y pixelkoordinátáit (második és harmadik oszlop), valamint
 egyéb paramétereket.
 
-A megtalált csillagokat a tvmark szkript segítségével plottoljuk fel:
+A megtalált csillagokat a \verb+tvmark+ szkript segítségével plottoljuk fel:
 
 \begin{verbatim}
   tvmark -x 2,3 -l 1 XX_Cyg-20181012_0001_R.stars
@@ -530,17 +527,17 @@ A megtalált csillagokat a tvmark szkript segítségével plottoljuk fel:
     \label{stars}
 \end{figure}
 
-A -x kapcsolóval azt mondjuk meg, hogy a bemenő adatfájlban melyik két oszlop
-az x,y koordináta, a -l kapcsolóval pedig, hogy melyik oszlop tartalmazza a
+A \verb+-x+ kapcsolóval azt mondjuk meg, hogy a bemenő adatfájlban melyik két oszlop
+az x,y koordináta, a \verb+-l+ kapcsolóval pedig, hogy melyik oszlop tartalmazza a
 csillagok neveit.
 
 Ellenőrizzük szemmel, hogy jó helyen vannak-e a felrajzolt körök és hogy
 nagyságrendileg tényleg megtalált-e kb. 100 csillagot a képen a fistar.
 
 {\bf Opcionális feladat:}
-Játszunk kicsit a treshold értékével. Próbáljuk ki kisebb, illetve nagyobb
+Játsszunk kicsit a treshold értékével! Próbáljuk ki kisebb, illetve nagyobb
 számokkal. Plottoljuk fel a megtalált csillagokat. Mik a tapasztalatok?
-Tipp: a tvmark -d parancs letörli a plotokat.
+Tipp: a \verb+tvmark -d+ parancs letörli a jelöléseket.
 
 \subsection{Képtranszformációk kiszámítása}
 
@@ -549,16 +546,14 @@ paramétereket. Ezeket a megtalált csillagok pozícióinak segítségével fogj
 megtenni. A következő szkript, amit használni fogunk, minden képre kiszámolja
 ezt nekünk, egy referencia képhez képest, ami most az első kép lesz.
 
-Hozzunk létre egy új szöveges fájlt match.sh néven, másoljuk bele a következő
-kódrészletet a FITSH oldaláról.
+Hozzunk létre egy új szöveges fájlt \verb+match.sh+ néven, másoljuk bele a következő kódrészletet a FITSH oldaláról.
 
 Írjuk át a referencia fájl nevét. Vigyázzunk, hogy itt sem kell kiterjesztés!
 Tegyük futtathatóvá a fájlt és futassuk is le.
 
 \subsection{A képek összetolása}
 
-Hozzunk létre egy új szöveges fált reg.sh néven. Másoljuk bele a következő
-kódrészletet.
+Hozzunk létre egy új szöveges fájlt \verb+reg.sh+ néven. Másoljuk bele a következő kódrészletet.
 
 Írjuk bele a következő sort:
 \begin{verbatim}
@@ -583,8 +578,8 @@ Készítsünk képeket a jegyzőkönyvbe az összetolt képek összehasonlítás
 
 A végső lépés következik, azaz a fényességmérés és a fénygörbe előállítása.
 Ehhez meg kell mérnünk a változó fényességét minden képen, valamint jó pár
-összehasonlító csillagét is. Ezen csillagoknál feltételezzük, hogy az ő
-fényességük nem változik időben.
+összehasonlító csillagét is. Ezen csillagokról feltételezzük, hogy az ő
+fényességük nem változott a mérés ideje alatt.
 
 \subsection{Az XX Cyg azonosítása}
 
@@ -647,15 +642,15 @@ vegyük. Formátum:
 
 \begin{verbatim}
   XX_Cyg px0 py0
-  Comp1 px1 py1
-  Comp2 px2 py2
-  Comp3 px3 py3
-  Comp4 px4 py4
-  Comp5 px5 py5
-  Comp6 px6 py6
+  Comp1  px1 py1
+  Comp2  px2 py2
+  Comp3  px3 py3
+  Comp4  px4 py4
+  Comp5  px5 py5
+  Comp6  px6 py6
 \end{verbatim}
 
-Mentsük el a fájlt phot.list néven. Plottoljuk fel a kiválasztott csillagokat
+Mentsük el a fájlt \verb+phot.list+ néven. Plottoljuk fel a kiválasztott csillagokat
 és készítsünk egy képet a jegyzőkönyvbe. A phot.list tartalmát táblázatként
 szintén rakjuk bele a jegyzőkönyvbe.
 
@@ -730,13 +725,13 @@ FITS=./reg
 PHOT=./phot
 
 cat base.list | \
-while read base dummy ; do
-    fiphot $FITS/$base.fits --input-list phot.list --col-id 1 --col-xy 2,3 \
-                            --apertures ... \
-                            --sky-fit median \
-                            --format IXY,MmFfBbs \
-                            --comment --output $PHOT/$base.phot
-done
+  while read base dummy ; do
+      fiphot $FITS/$base.fits --input-list phot.list --col-id 1 --col-xy 2,3 \
+                              --apertures ... \
+                              --sky-fit median \
+                              --format IXY,MmFfBbs \
+                              --comment --output $PHOT/$base.phot
+  done
 \end{verbatim}
 
 \begin{figure*}[ht!]
@@ -755,16 +750,14 @@ pedig egy ennél kb. nyolccal nagyobb számot.
 
 Azaz, ha pl. az átlag félértékszélességünk 3.78, akkor az első szám 4, majd 5,
 6, 7, 8, 9, az apertúra belső sugara 12, a külső pedig 20.
-Ezeket a következő formában kell a fiphot-nak megadni a --apertures kapcsoló
-után:
-4:12:20,5:12:20,6:12:20,7:12:20,8:12:20,9:12:20
+Ezeket a következő formában kell a fiphot-nak megadni a \verb+--apertures+ kapcsoló után: \verb+4:12:20,5:12:20,6:12:20,7:12:20,8:12:20,9:12:20+
 Figyelem, az itt bemutatott értékek nem biztos, hogy a jó apertúra értékek!
 
-Figyeljük meg, hogy az égi gyűrű mérete mindegyik aprtúrához ugyan akkora!
+Figyeljük meg, hogy az égi gyűrű mérete mindegyik aprtúrához ugyanakkora!
 
-Futassuk le a phot.sh-t és nézzük meg a keletkezett fájlokat a phot mappában.
-Milyen a fájlok szerkezete? Tipp: nézzük meg a szkriptben a fiphot parancs
---format kapcsolója után megadott formátumot.
+Futassuk le a \verb+phot.sh+-t és nézzük meg a keletkezett fájlokat a phot mappában.
+Milyen a fájlok szerkezete? Tipp: nézzük meg a szkriptben a \verb+fiphot+ parancs
+\verb+--format+ kapcsolója után megadott formátumot.
 
 
 {\bf Extra opcionális feladat:}
@@ -862,7 +855,7 @@ amelyik nem. Ezt is ellenőrizzük le több másik összehasonlítóval.
     \centering
     \includegraphics[width=0.65\linewidth]{pics/lc.png}
     \caption{Az XX Cyg fénygörbéje és a comp-check.}
-    \label{apert}
+    \label{lc}
 \end{figure*}
 
 Ha megvan a legjobb összehasonlító, ami nem változó, akkor készítsük el a
@@ -883,12 +876,5 @@ A jegyzőkönyvet a labor alatt elvégzett munkáról kell megírni, pár oldal
 terjedelemben. Mindenkitől külön jegyzőkönyvet várunk. A jegyzőkönyv várt
 formátuma pdf. A végső jegyzőkönyvet a labor után maximum 1-2 héttel kell
 elküldeni a laborvezetőknek értékelésre.
-
-%\begin{figure}
-%    \centering
-%    \includegraphics[width=3.0in]{myfigure}
-%    \caption{Simulation Results}
-%    \label{simulationfigure}
-%\end{figure}
 
 \end{document}
