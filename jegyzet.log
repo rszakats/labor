@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2020.3.9)  3 APR 2020 18:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2020.3.9)  3 APR 2020 18:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -545,7 +545,7 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 22.
  [2]
-Overfull \hbox (0.85277pt too wide) in paragraph at lines 92--96
+Overfull \hbox (0.85277pt too wide) in paragraph at lines 93--97
 []\OT1/cmr/m/n/10 Mega a form^^Satum a Fle-xib-le Image Tran-sport Sys-tem r^^?
 ovid^^S^^Pt^^Sese. Ez egy stan-dard, di-git^^Salis form^^Satum,
  []
@@ -553,28 +553,28 @@ ovid^^S^^Pt^^Sese. Ez egy stan-dard, di-git^^Salis form^^Satum,
 <pics/object.png, id=116, 716.6775pt x 499.8675pt>
 File: pics/object.png Graphic file (type png)
 <use pics/object.png>
-Package pdftex.def Info: pics/object.png  used on input line 155.
+Package pdftex.def Info: pics/object.png  used on input line 156.
 (pdftex.def)             Requested size: 360.00137pt x 251.10011pt.
 [3] [4 <./pics/object.png>]
 <pics/biascomp.png, id=128, 716.6775pt x 499.8675pt>
 File: pics/biascomp.png Graphic file (type png)
 <use pics/biascomp.png>
-Package pdftex.def Info: pics/biascomp.png  used on input line 271.
+Package pdftex.def Info: pics/biascomp.png  used on input line 272.
 (pdftex.def)             Requested size: 360.00137pt x 251.10011pt.
  [5] [6 <./pics/biascomp.png>]
 <pics/darkcomp.png, id=139, 716.6775pt x 499.8675pt>
 File: pics/darkcomp.png Graphic file (type png)
 <use pics/darkcomp.png>
-Package pdftex.def Info: pics/darkcomp.png  used on input line 367.
+Package pdftex.def Info: pics/darkcomp.png  used on input line 368.
 (pdftex.def)             Requested size: 360.00137pt x 251.10011pt.
  [7] [8 <./pics/darkcomp.png>] [9]
 <pics/tvmark.png, id=158, 716.6775pt x 499.8675pt>
 File: pics/tvmark.png Graphic file (type png)
 <use pics/tvmark.png>
-Package pdftex.def Info: pics/tvmark.png  used on input line 527.
+Package pdftex.def Info: pics/tvmark.png  used on input line 528.
 (pdftex.def)             Requested size: 360.00137pt x 251.10011pt.
  [10] [11 <./pics/tvmark.png>]
-Overfull \hbox (3.43613pt too wide) in paragraph at lines 590--594
+Overfull \hbox (3.43613pt too wide) in paragraph at lines 591--595
 \OT1/cmr/m/n/10 Eddig nem fog-lal-koz-tunk az-zal a k^^Serd^^Sessel, hogy hol v
 an pon-to-san a v^^Saltoz^^Sonk a felv^^Seteleken. J^^Sohiszem}uen
  []
@@ -582,61 +582,54 @@ an pon-to-san a v^^Saltoz^^Sonk a felv^^Seteleken. J^^Sohiszem}uen
 <pics/dss.png, id=170, 354.32375pt x 354.32375pt>
 File: pics/dss.png Graphic file (type png)
 <use pics/dss.png>
-Package pdftex.def Info: pics/dss.png  used on input line 601.
+Package pdftex.def Info: pics/dss.png  used on input line 602.
 (pdftex.def)             Requested size: 270.00275pt x 270.0079pt.
 [12 <./pics/dss.png>]
 <pics/radialprofil.png, id=178, 581.72888pt x 446.11111pt>
 File: pics/radialprofil.png Graphic file (type png)
 <use pics/radialprofil.png>
-Package pdftex.def Info: pics/radialprofil.png  used on input line 666.
+Package pdftex.def Info: pics/radialprofil.png  used on input line 667.
 (pdftex.def)             Requested size: 314.99863pt x 241.5635pt.
 <pics/surface.png, id=179, 581.72888pt x 446.11111pt>
 File: pics/surface.png Graphic file (type png)
 <use pics/surface.png>
-Package pdftex.def Info: pics/surface.png  used on input line 682.
+Package pdftex.def Info: pics/surface.png  used on input line 683.
 (pdftex.def)             Requested size: 182.24753pt x 139.75653pt.
 <pics/area.png, id=180, 581.72888pt x 446.11111pt>
 File: pics/area.png Graphic file (type png)
 <use pics/area.png>
-Package pdftex.def Info: pics/area.png  used on input line 688.
+Package pdftex.def Info: pics/area.png  used on input line 689.
 (pdftex.def)             Requested size: 182.24753pt x 139.75653pt.
  [13] [14 <./pics/radialprofil.png> <./pics/surface.png> <./pics/area.png>]
 <pics/aperture.png, id=196, 716.6775pt x 499.8675pt>
 File: pics/aperture.png Graphic file (type png)
 <use pics/aperture.png>
-Package pdftex.def Info: pics/aperture.png  used on input line 743.
+Package pdftex.def Info: pics/aperture.png  used on input line 744.
 (pdftex.def)             Requested size: 270.00275pt x 188.31937pt.
- [15 <./pics/aperture.png>]
-Overfull \hbox (15.75035pt too wide) in paragraph at lines 769--779
-[]\OT1/cmr/bx/n/10 Extra fel-adat: \OT1/cmr/m/n/10 Ha na-gyon pon-tos fo-to-met
--ri^^Sat aka-runk, ak-kor az ^^?ossze-tolt k^^Sepeken ^^Serdemes ^^Sujracentr^^
-Salni
- []
-
-[16]
+ [15 <./pics/aperture.png>] [16]
 <pics/lc.png, id=207, 481.8pt x 361.35pt>
 File: pics/lc.png Graphic file (type png)
 <use pics/lc.png>
-Package pdftex.def Info: pics/lc.png  used on input line 862.
+Package pdftex.def Info: pics/lc.png  used on input line 863.
 (pdftex.def)             Requested size: 292.49725pt x 219.37556pt.
 
 
 Package hyperref Warning: Glyph not defined in PD1 encoding,
-(hyperref)                removing `\H' on input line 879.
+(hyperref)                removing `\H' on input line 880.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 893.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 894.
 [17 <./pics/lc.png (PNG copy)>] [18]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 893.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 894.
  (./jegyzet.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 893.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 893.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 894.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 894.
 Package rerunfilecheck Info: File `jegyzet.out' has not changed.
 (rerunfilecheck)             Checksum: 2298A9B264A6D38F73CF57299ED38238;1114.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 893.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 894.
  ) 
 Here is how much of TeX's memory you used:
  16796 strings out of 493978
@@ -654,7 +647,7 @@ f-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmtt10.pfb>
-Output written on jegyzet.pdf (18 pages, 1489072 bytes).
+Output written on jegyzet.pdf (18 pages, 1489116 bytes).
 PDF statistics:
  259 PDF objects out of 1000 (max. 8388607)
  209 compressed objects within 3 object streams
