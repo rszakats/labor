@@ -13,5 +13,5 @@
 \select@language {hungarian} \contentsline {section}{\numberline {6}Fotometria}{12}{section.6}% 
 \select@language {hungarian} \contentsline {subsection}{\numberline {6.1}Az XX Cyg azonos\IeC {\'\i }t\IeC {\'a}sa}{12}{subsection.6.1}% 
 \select@language {hungarian} \contentsline {subsection}{\numberline {6.2}Apert\IeC {\'u}ra fotometria}{13}{subsection.6.2}% 
-\select@language {hungarian} \contentsline {subsection}{\numberline {6.3}Differenci\IeC {\'a}lis fotometria}{16}{subsection.6.3}% 
-\select@language {hungarian} \contentsline {section}{\numberline {7}Jegyz\IeC {\H o}k\IeC {\"o}nyv}{17}{section.7}% 
+\select@language {hungarian} \contentsline {subsection}{\numberline {6.3}Differenci\IeC {\'a}lis fotometria}{17}{subsection.6.3}% 
+\select@language {hungarian} \contentsline {section}{\numberline {7}Jegyz\IeC {\H o}k\IeC {\"o}nyv}{18}{section.7}% 

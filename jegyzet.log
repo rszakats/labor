@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2020.3.9)  3 APR 2020 18:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2020.3.9)  16 APR 2020 06:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -46,6 +46,13 @@ File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
 )
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2018/08/11 v2.0j Standard LaTeX package
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def
+File: t1enc.def 2018/08/11 v2.0j Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
+))
 (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2018/08/11 v1.3c Input encoding file
 \inpenc@prehook=\toks15
@@ -397,31 +404,192 @@ Package babel Info: Making ` an active character on input line 2819.
 \c@footnote@add=\count277
 \c@footnote@ch=\count278
 ))
-(./jegyzet.aux
+(/usr/share/texlive/texmf-dist/tex/latex/upquote/upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
 
-LaTeX Warning: Label `biascomp' multiply defined.
+(/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2018/08/11 v2.0j Standard LaTeX package
+Package textcomp Info: Sub-encoding information:
+(textcomp)               5 = only ISO-Adobe without \textcurrency
+(textcomp)               4 = 5 + \texteuro
+(textcomp)               3 = 4 + \textohm
+(textcomp)               2 = 3 + \textestimated + \textcurrency
+(textcomp)               1 = TS1 - \textcircled - \t
+(textcomp)               0 = TS1 (full)
+(textcomp)             Font families with sub-encoding setting implement
+(textcomp)             only a restricted character set as indicated.
+(textcomp)             Family '?' is the default used for unknown fonts.
+(textcomp)             See the documentation for details.
+Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 79.
 
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+Now handling font encoding TS1 ...
+... processing UTF-8 mapping file for font encoding TS1
 
-LaTeX Warning: Label `apert' multiply defined.
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu
+File: ts1enc.dfu 2018/10/05 v1.2f UTF-8 support for inputenc
+   defining Unicode char U+00A2 (decimal 162)
+   defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00A4 (decimal 164)
+   defining Unicode char U+00A5 (decimal 165)
+   defining Unicode char U+00A6 (decimal 166)
+   defining Unicode char U+00A7 (decimal 167)
+   defining Unicode char U+00A8 (decimal 168)
+   defining Unicode char U+00A9 (decimal 169)
+   defining Unicode char U+00AA (decimal 170)
+   defining Unicode char U+00AC (decimal 172)
+   defining Unicode char U+00AE (decimal 174)
+   defining Unicode char U+00AF (decimal 175)
+   defining Unicode char U+00B0 (decimal 176)
+   defining Unicode char U+00B1 (decimal 177)
+   defining Unicode char U+00B2 (decimal 178)
+   defining Unicode char U+00B3 (decimal 179)
+   defining Unicode char U+00B4 (decimal 180)
+   defining Unicode char U+00B5 (decimal 181)
+   defining Unicode char U+00B6 (decimal 182)
+   defining Unicode char U+00B7 (decimal 183)
+   defining Unicode char U+00B9 (decimal 185)
+   defining Unicode char U+00BA (decimal 186)
+   defining Unicode char U+00BC (decimal 188)
+   defining Unicode char U+00BD (decimal 189)
+   defining Unicode char U+00BE (decimal 190)
+   defining Unicode char U+00D7 (decimal 215)
+   defining Unicode char U+00F7 (decimal 247)
+   defining Unicode char U+0192 (decimal 402)
+   defining Unicode char U+02C7 (decimal 711)
+   defining Unicode char U+02D8 (decimal 728)
+   defining Unicode char U+02DD (decimal 733)
+   defining Unicode char U+0E3F (decimal 3647)
+   defining Unicode char U+2016 (decimal 8214)
+   defining Unicode char U+2020 (decimal 8224)
+   defining Unicode char U+2021 (decimal 8225)
+   defining Unicode char U+2022 (decimal 8226)
+   defining Unicode char U+2030 (decimal 8240)
+   defining Unicode char U+2031 (decimal 8241)
+   defining Unicode char U+203B (decimal 8251)
+   defining Unicode char U+203D (decimal 8253)
+   defining Unicode char U+2044 (decimal 8260)
+   defining Unicode char U+204E (decimal 8270)
+   defining Unicode char U+2052 (decimal 8274)
+   defining Unicode char U+20A1 (decimal 8353)
+   defining Unicode char U+20A4 (decimal 8356)
+   defining Unicode char U+20A6 (decimal 8358)
+   defining Unicode char U+20A9 (decimal 8361)
+   defining Unicode char U+20AB (decimal 8363)
+   defining Unicode char U+20AC (decimal 8364)
+   defining Unicode char U+20B1 (decimal 8369)
+   defining Unicode char U+2103 (decimal 8451)
+   defining Unicode char U+2116 (decimal 8470)
+   defining Unicode char U+2117 (decimal 8471)
+   defining Unicode char U+211E (decimal 8478)
+   defining Unicode char U+2120 (decimal 8480)
+   defining Unicode char U+2122 (decimal 8482)
+   defining Unicode char U+2126 (decimal 8486)
+   defining Unicode char U+2127 (decimal 8487)
+   defining Unicode char U+212E (decimal 8494)
+   defining Unicode char U+2190 (decimal 8592)
+   defining Unicode char U+2191 (decimal 8593)
+   defining Unicode char U+2192 (decimal 8594)
+   defining Unicode char U+2193 (decimal 8595)
+   defining Unicode char U+2329 (decimal 9001)
+   defining Unicode char U+232A (decimal 9002)
+   defining Unicode char U+2422 (decimal 9250)
+   defining Unicode char U+25E6 (decimal 9702)
+   defining Unicode char U+25EF (decimal 9711)
+   defining Unicode char U+266A (decimal 9834)
+   defining Unicode char U+FEFF (decimal 65279)
+))
+LaTeX Info: Redefining \oldstylenums on input line 334.
+Package textcomp Info: Setting cmr sub-encoding to TS1/0 on input line 349.
+Package textcomp Info: Setting cmss sub-encoding to TS1/0 on input line 350.
+Package textcomp Info: Setting cmtt sub-encoding to TS1/0 on input line 351.
+Package textcomp Info: Setting cmvtt sub-encoding to TS1/0 on input line 352.
+Package textcomp Info: Setting cmbr sub-encoding to TS1/0 on input line 353.
+Package textcomp Info: Setting cmtl sub-encoding to TS1/0 on input line 354.
+Package textcomp Info: Setting ccr sub-encoding to TS1/0 on input line 355.
+Package textcomp Info: Setting ptm sub-encoding to TS1/4 on input line 356.
+Package textcomp Info: Setting pcr sub-encoding to TS1/4 on input line 357.
+Package textcomp Info: Setting phv sub-encoding to TS1/4 on input line 358.
+Package textcomp Info: Setting ppl sub-encoding to TS1/3 on input line 359.
+Package textcomp Info: Setting pag sub-encoding to TS1/4 on input line 360.
+Package textcomp Info: Setting pbk sub-encoding to TS1/4 on input line 361.
+Package textcomp Info: Setting pnc sub-encoding to TS1/4 on input line 362.
+Package textcomp Info: Setting pzc sub-encoding to TS1/4 on input line 363.
+Package textcomp Info: Setting bch sub-encoding to TS1/4 on input line 364.
+Package textcomp Info: Setting put sub-encoding to TS1/5 on input line 365.
+Package textcomp Info: Setting uag sub-encoding to TS1/5 on input line 366.
+Package textcomp Info: Setting ugq sub-encoding to TS1/5 on input line 367.
+Package textcomp Info: Setting ul8 sub-encoding to TS1/4 on input line 368.
+Package textcomp Info: Setting ul9 sub-encoding to TS1/4 on input line 369.
+Package textcomp Info: Setting augie sub-encoding to TS1/5 on input line 370.
+Package textcomp Info: Setting dayrom sub-encoding to TS1/3 on input line 371.
+Package textcomp Info: Setting dayroms sub-encoding to TS1/3 on input line 372.
 
-)
+Package textcomp Info: Setting pxr sub-encoding to TS1/0 on input line 373.
+Package textcomp Info: Setting pxss sub-encoding to TS1/0 on input line 374.
+Package textcomp Info: Setting pxtt sub-encoding to TS1/0 on input line 375.
+Package textcomp Info: Setting txr sub-encoding to TS1/0 on input line 376.
+Package textcomp Info: Setting txss sub-encoding to TS1/0 on input line 377.
+Package textcomp Info: Setting txtt sub-encoding to TS1/0 on input line 378.
+Package textcomp Info: Setting lmr sub-encoding to TS1/0 on input line 379.
+Package textcomp Info: Setting lmdh sub-encoding to TS1/0 on input line 380.
+Package textcomp Info: Setting lmss sub-encoding to TS1/0 on input line 381.
+Package textcomp Info: Setting lmssq sub-encoding to TS1/0 on input line 382.
+Package textcomp Info: Setting lmvtt sub-encoding to TS1/0 on input line 383.
+Package textcomp Info: Setting lmtt sub-encoding to TS1/0 on input line 384.
+Package textcomp Info: Setting qhv sub-encoding to TS1/0 on input line 385.
+Package textcomp Info: Setting qag sub-encoding to TS1/0 on input line 386.
+Package textcomp Info: Setting qbk sub-encoding to TS1/0 on input line 387.
+Package textcomp Info: Setting qcr sub-encoding to TS1/0 on input line 388.
+Package textcomp Info: Setting qcs sub-encoding to TS1/0 on input line 389.
+Package textcomp Info: Setting qpl sub-encoding to TS1/0 on input line 390.
+Package textcomp Info: Setting qtm sub-encoding to TS1/0 on input line 391.
+Package textcomp Info: Setting qzc sub-encoding to TS1/0 on input line 392.
+Package textcomp Info: Setting qhvc sub-encoding to TS1/0 on input line 393.
+Package textcomp Info: Setting futs sub-encoding to TS1/4 on input line 394.
+Package textcomp Info: Setting futx sub-encoding to TS1/4 on input line 395.
+Package textcomp Info: Setting futj sub-encoding to TS1/4 on input line 396.
+Package textcomp Info: Setting hlh sub-encoding to TS1/3 on input line 397.
+Package textcomp Info: Setting hls sub-encoding to TS1/3 on input line 398.
+Package textcomp Info: Setting hlst sub-encoding to TS1/3 on input line 399.
+Package textcomp Info: Setting hlct sub-encoding to TS1/5 on input line 400.
+Package textcomp Info: Setting hlx sub-encoding to TS1/5 on input line 401.
+Package textcomp Info: Setting hlce sub-encoding to TS1/5 on input line 402.
+Package textcomp Info: Setting hlcn sub-encoding to TS1/5 on input line 403.
+Package textcomp Info: Setting hlcw sub-encoding to TS1/5 on input line 404.
+Package textcomp Info: Setting hlcf sub-encoding to TS1/5 on input line 405.
+Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 406.
+Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
+Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
+Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
+)) (./jegyzet.aux)
 \openout1 = `jegyzet.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
- (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 12.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 12.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 12.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count279
 \scratchdimen=\dimen150
@@ -452,7 +620,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box46
-Package hyperref Info: Link coloring OFF on input line 10.
+Package hyperref Info: Link coloring OFF on input line 12.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -462,9 +630,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count285
 )
-LaTeX Info: Redefining \ref on input line 10.
-LaTeX Info: Redefining \pageref on input line 10.
-LaTeX Info: Redefining \nameref on input line 10.
+LaTeX Info: Redefining \ref on input line 12.
+LaTeX Info: Redefining \pageref on input line 12.
+LaTeX Info: Redefining \nameref on input line 12.
 
 (./jegyzet.out) (./jegyzet.out)
 \@outlinefile=\write3
@@ -505,21 +673,16 @@ LaTeX Info: Redefining \nameref on input line 10.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-
-LaTeX Warning: Please use \usepackage{t1enc} with
-               \usepackage[hungarian]{babel}, to get accented chars hyphenated.
-
-
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 LaTeX Info: Redefining \cal on input line 496.
 LaTeX Info: Redefining \mit on input line 497.
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 16.
+(Font)              <12> on input line 18.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 16.
+(Font)              <8> on input line 18.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 16.
+(Font)              <6> on input line 18.
  (./jegyzet.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 5.
@@ -536,121 +699,116 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 
 Package hyperref Warning: Glyph not defined in PD1 encoding,
-(hyperref)                removing `\H' on input line 19.
+(hyperref)                removing `\H' on input line 21.
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 22.
-(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 24.
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+) [2]
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 122
+.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
+File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 22.
- [2]
-Overfull \hbox (0.85277pt too wide) in paragraph at lines 93--97
-[]\OT1/cmr/m/n/10 Mega a form^^Satum a Fle-xib-le Image Tran-sport Sys-tem r^^?
-ovid^^S^^Pt^^Sese. Ez egy stan-dard, di-git^^Salis form^^Satum,
- []
-
-<pics/object.png, id=116, 716.6775pt x 499.8675pt>
+<pics/object.png, id=117, 716.6775pt x 499.8675pt>
 File: pics/object.png Graphic file (type png)
 <use pics/object.png>
 Package pdftex.def Info: pics/object.png  used on input line 156.
 (pdftex.def)             Requested size: 360.00137pt x 251.10011pt.
-[3] [4 <./pics/object.png>]
-<pics/biascomp.png, id=128, 716.6775pt x 499.8675pt>
+ [3] [4 <./pics/object.png>]
+<pics/biascomp.png, id=130, 716.6775pt x 499.8675pt>
 File: pics/biascomp.png Graphic file (type png)
 <use pics/biascomp.png>
 Package pdftex.def Info: pics/biascomp.png  used on input line 272.
 (pdftex.def)             Requested size: 360.00137pt x 251.10011pt.
  [5] [6 <./pics/biascomp.png>]
-<pics/darkcomp.png, id=139, 716.6775pt x 499.8675pt>
+<pics/darkcomp.png, id=143, 716.6775pt x 499.8675pt>
 File: pics/darkcomp.png Graphic file (type png)
 <use pics/darkcomp.png>
 Package pdftex.def Info: pics/darkcomp.png  used on input line 368.
 (pdftex.def)             Requested size: 360.00137pt x 251.10011pt.
  [7] [8 <./pics/darkcomp.png>] [9]
-<pics/tvmark.png, id=158, 716.6775pt x 499.8675pt>
+<pics/tvmark.png, id=162, 716.6775pt x 499.8675pt>
 File: pics/tvmark.png Graphic file (type png)
 <use pics/tvmark.png>
-Package pdftex.def Info: pics/tvmark.png  used on input line 528.
+Package pdftex.def Info: pics/tvmark.png  used on input line 526.
 (pdftex.def)             Requested size: 360.00137pt x 251.10011pt.
- [10] [11 <./pics/tvmark.png>]
-Overfull \hbox (3.43613pt too wide) in paragraph at lines 591--595
-\OT1/cmr/m/n/10 Eddig nem fog-lal-koz-tunk az-zal a k^^Serd^^Sessel, hogy hol v
-an pon-to-san a v^^Saltoz^^Sonk a felv^^Seteleken. J^^Sohiszem}uen
- []
-
-<pics/dss.png, id=170, 354.32375pt x 354.32375pt>
+ [10]
+[11 <./pics/tvmark.png>]
+<pics/dss.png, id=174, 354.32375pt x 354.32375pt>
 File: pics/dss.png Graphic file (type png)
 <use pics/dss.png>
-Package pdftex.def Info: pics/dss.png  used on input line 602.
+Package pdftex.def Info: pics/dss.png  used on input line 598.
 (pdftex.def)             Requested size: 270.00275pt x 270.0079pt.
-[12 <./pics/dss.png>]
-<pics/radialprofil.png, id=178, 581.72888pt x 446.11111pt>
+ [12 <./pics/dss.png>]
+<pics/radialprofil.png, id=182, 581.72888pt x 446.11111pt>
 File: pics/radialprofil.png Graphic file (type png)
 <use pics/radialprofil.png>
-Package pdftex.def Info: pics/radialprofil.png  used on input line 667.
+Package pdftex.def Info: pics/radialprofil.png  used on input line 663.
 (pdftex.def)             Requested size: 314.99863pt x 241.5635pt.
-<pics/surface.png, id=179, 581.72888pt x 446.11111pt>
+<pics/surface.png, id=183, 581.72888pt x 446.11111pt>
 File: pics/surface.png Graphic file (type png)
 <use pics/surface.png>
-Package pdftex.def Info: pics/surface.png  used on input line 683.
+Package pdftex.def Info: pics/surface.png  used on input line 679.
 (pdftex.def)             Requested size: 182.24753pt x 139.75653pt.
-<pics/area.png, id=180, 581.72888pt x 446.11111pt>
+<pics/area.png, id=184, 581.72888pt x 446.11111pt>
 File: pics/area.png Graphic file (type png)
 <use pics/area.png>
-Package pdftex.def Info: pics/area.png  used on input line 689.
+Package pdftex.def Info: pics/area.png  used on input line 685.
 (pdftex.def)             Requested size: 182.24753pt x 139.75653pt.
  [13] [14 <./pics/radialprofil.png> <./pics/surface.png> <./pics/area.png>]
-<pics/aperture.png, id=196, 716.6775pt x 499.8675pt>
+<pics/aperture.png, id=200, 716.6775pt x 499.8675pt>
 File: pics/aperture.png Graphic file (type png)
 <use pics/aperture.png>
-Package pdftex.def Info: pics/aperture.png  used on input line 744.
+Package pdftex.def Info: pics/aperture.png  used on input line 740.
 (pdftex.def)             Requested size: 270.00275pt x 188.31937pt.
  [15 <./pics/aperture.png>] [16]
-<pics/lc.png, id=207, 481.8pt x 361.35pt>
+<pics/lc.png, id=211, 481.8pt x 361.35pt>
 File: pics/lc.png Graphic file (type png)
 <use pics/lc.png>
-Package pdftex.def Info: pics/lc.png  used on input line 863.
+Package pdftex.def Info: pics/lc.png  used on input line 857.
 (pdftex.def)             Requested size: 292.49725pt x 219.37556pt.
 
 
 Package hyperref Warning: Glyph not defined in PD1 encoding,
-(hyperref)                removing `\H' on input line 880.
+(hyperref)                removing `\H' on input line 874.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 894.
-[17 <./pics/lc.png (PNG copy)>] [18]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 894.
+[17 <./pics/lc.png (PNG copy)>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 881.
+ [18]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 881.
  (./jegyzet.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 894.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 894.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 881.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 881.
 Package rerunfilecheck Info: File `jegyzet.out' has not changed.
 (rerunfilecheck)             Checksum: 2298A9B264A6D38F73CF57299ED38238;1114.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 894.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 881.
  ) 
 Here is how much of TeX's memory you used:
- 16796 strings out of 493978
- 301622 string characters out of 6161123
- 508653 words of memory out of 5000000
- 20356 multiletter control sequences out of 15000+600000
- 537107 words of font info for 40 fonts, out of 8000000 for 9000
+ 17500 strings out of 493978
+ 311299 string characters out of 6161123
+ 505708 words of memory out of 5000000
+ 21031 multiletter control sequences out of 15000+600000
+ 542095 words of font info for 44 fonts, out of 8000000 for 9000
  350 hyphenation exceptions out of 8191
- 47i,7n,65p,295b,392s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmtt10.pfb>
-Output written on jegyzet.pdf (18 pages, 1489116 bytes).
+ 47i,7n,65p,308b,392s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/rszakats/.texlive2018/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.
+600pk> </home/rszakats/.texlive2018/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt1
+000.600pk> </home/rszakats/.texlive2018/texmf-var/fonts/pk/ljfour/jknappen/ec/e
+cti1000.600pk> </home/rszakats/.texlive2018/texmf-var/fonts/pk/ljfour/jknappen/
+ec/ectt1000.600pk> </home/rszakats/.texlive2018/texmf-var/fonts/pk/ljfour/jknap
+pen/ec/tcrm1000.600pk> </home/rszakats/.texlive2018/texmf-var/fonts/pk/ljfour/j
+knappen/ec/ecrm1000.600pk> </home/rszakats/.texlive2018/texmf-var/fonts/pk/ljfo
+ur/jknappen/ec/ecbx1000.600pk> </home/rszakats/.texlive2018/texmf-var/fonts/pk/
+ljfour/jknappen/ec/ecbx1440.600pk> </home/rszakats/.texlive2018/texmf-var/fonts
+/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/rszakats/.texlive2018/texmf-var/f
+onts/pk/ljfour/jknappen/ec/ecrm1728.600pk></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on jegyzet.pdf (18 pages, 1486047 bytes).
 PDF statistics:
- 259 PDF objects out of 1000 (max. 8388607)
- 209 compressed objects within 3 object streams
+ 649 PDF objects out of 1000 (max. 8388607)
+ 229 compressed objects within 3 object streams
  47 named destinations out of 1000 (max. 500000)
  187 words of extra memory for PDF output out of 10000 (max. 10000000)
 

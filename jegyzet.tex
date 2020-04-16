@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{graphicx}
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
 \usepackage{geometry}
@@ -494,9 +495,9 @@ várja tőlünk a bemeneteti neveket.
 Mit tesz ez a fájl? Létrehoz egy új könyvtárat, astrom néven, majd létrehozza a
 bemeneti listafájlt. Ezek után ez a bemenet egy while ciklusba kerül be, ami
 minden egyes elemen végigmegy. A cikluson belül a fistar megekeresi nekünk a
-bemeneti képen a csillagokat, majd ez kiírsára kerül egy megfelelően formázott
+bemeneti képen a csillagokat, majd ez kiírásra kerül egy megfelelően formázott
 fájlba az astrom mappában.
-A --flux-threshold kapcsolóval azt tudjuk állítai, hogy milyen halvány
+A --flux-threshold kapcsolóval azt tudjuk állítani, hogy milyen halvány
 forrásokat keressen a program. Minél kisebbre  állítjuk, annál halványabb
 csillagokat talál meg. A jelenlegi 10000-es értékkel kb. 100 csillagot fog
 megtalálni minden képen.
@@ -625,7 +626,7 @@ hogy Display as GIF file.
 Ha megvan a csillag, akkor tvmark-kal plottoljuk fel az első képünkön megtalált
 csillagokat és jegyezzül fel a célpont sorszámát.
 
-Ezek után válasszunk még 6 öszehasonlító csillagot.
+Ezek után válasszunk még 6 összehasonlító csillagot.
 A jó összehasonlító:
 \begin{itemize}
   \item Nincs túl távol a célponttól.
@@ -665,7 +666,7 @@ szintén rakjuk bele a jegyzőkönyvbe.
 \end{figure*}
 
 Az apertúra fotometria lényege, hogy lerakunk a képre egy a csillagra centrált
-aprtúrát (kört) és azon belül megmérjük a fluxust. Ez után lerakunk a csillag
+aprtúrát (kört) és azon belül megmérjük a fluxust. Ezután lerakunk a csillag
 köré egy gyűrűt, amiben megmérjük az égi hátteret és ezt levonjuk a csillagon
 mért fluxusból, a csillag területére arányosítva.
 Ez a módszer jól működik nem túl zsúfolt csillagmezőkön, illetve akkor is, ha
@@ -688,7 +689,7 @@ valamiért a csillagok profilja nem tökéletes, vagy a távcső defókuszált.
 \end{figure}
 
 Hátránya, hogy sűrű területeken az egymásba lógó és sűrűn elhelyezkedő
-csillagok miatt nem ad jó erdeményt. Ebben az esetben PSF fotometriát kell
+csillagok miatt nem ad jó eredményt. Ebben az esetben PSF fotometriát kell
 alkalmazni, ami a csillagprofilokat illeszti meg és az alapján számol fluxust.
 Mi ez utóbbi módszert relatíve bonyolult természete miatt nem fogjuk használni,
 valamint azért sem, mert a mi esetünkben a csillagaink kellően távol
@@ -744,7 +745,7 @@ cat base.list | \
 Ahol az apertures ... részt helyettesítsük a következő módon:
 A kiszámolt átlagos félértékszélességet kerekítsük fel egészre, majd egyesével
 növeljük az értékét öt lépésen keresztül. Így lesz 6 számunk, ami az apertúra
-sugarát ada meg. Ezek után nézzük meg a legnagyobb számot és az égi gyűrű belső
+sugarát adja meg. Ezek után nézzük meg a legnagyobb számot és az égi gyűrű belső
 sugarának válasszunk egy ennél pár pixellel nagyobb számot. A külső sugárnak
 pedig egy ennél kb. nyolccal nagyobb számot.
 
@@ -753,7 +754,7 @@ Azaz, ha pl. az átlag félértékszélességünk 3.78, akkor az első szám 4, 
 Ezeket a következő formában kell a fiphot-nak megadni a \verb+--apertures+ kapcsoló után: \verb+4:12:20,5:12:20,6:12:20,7:12:20,8:12:20,9:12:20+
 Figyelem, az itt bemutatott értékek nem biztos, hogy a jó apertúra értékek!
 
-Figyeljük meg, hogy az égi gyűrű mérete mindegyik aprtúrához ugyanakkora!
+Figyeljük meg, hogy az égi gyűrű mérete mindegyik apertúrához ugyanakkora!
 
 Futassuk le a \verb+phot.sh+-t és nézzük meg a keletkezett fájlokat a phot mappában.
 Milyen a fájlok szerkezete? Tipp: nézzük meg a szkriptben a \verb+fiphot+ parancs
@@ -768,7 +769,7 @@ nagyon picit minden csillag máshol van, mint a referencia képen. A mi
 esetünkben ez most nem gond, de általában érdmes ezt megtenni.
 Ha valaki érez magában erőt, akkor írjon egy szkriptet, ami minden összetolt
 képen újracentrálja a mérendő csillagokat és ezeket a centrált pixel
-kooordinátákat használja majd fel az aktuális fotometriához. Ha valakin így
+kooordinátákat használja majd fel az aktuális fotometriához. Ha valaki így
 tesz, akkor ehhez a fenti szkriptet is módosítania kell.
 
 
@@ -793,7 +794,7 @@ A gnuplotban adjuk ki a következő parancsokat:
 Vizsgáljuk meg az elkészült ábrát. Mit látunk? Miért kellett megfordítani az y
 tengelyt? Milyen következtetést tudunk levonni az apertúrák nagyságáról a
 fotometria szempontjából? Az ábrát rakjuk be a jegyzőkönyvbe és írjuk le a
-tapasztalatinkat is.
+tapasztalatainkat is.
 
 Ha kell, akkor írjuk át az apertúrák méretét és futassuk le újra a phot.sh-t.
 Készítsük el újra a növekedési görbét.
