@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Personal webpage of Róbert Szakáts">
+  <meta name="author" content="Róbert Szakáts">
+
+  <title>astname</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/scrolling-nav.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="index.html">Main page</a>
+      <!-- <a class="navbar-brand js-scroll-trigger" href="index_en.html">English</a> -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#intro">Introduction</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#install">Installation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#usage">Usage</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+	<div class="row" id="header">
+    <div class="col-md-3 col-md-offset-9">
+        <img src="{% static "navbar_bg.jpg" %}" alt="My image"/>
+    </div>
+</div>
+
+  <section id="intro">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Introduction</h2>
+          <p class="lead">Astname is a small script written in bash to get the name/provisional designation or asteroid number of
+            a small solar system body. Identification is based on NASA JPL/Horizons
+            index file, DASTCOM.IDX.
+            If it is not present, it will be downloaded from
+            ftp://ssd.jpl.nasa.gov/pub/xfr/DASTCOM.IDX, also, if it is older than 30 days,
+            the index file will be re-downloded.<br>
+            It was tested on Debian GNU/Linux, but it should work on other linux distributions too.<br>
+            The script runs some tests on the input, so e.g. if it is a float number, it will exit. The input tests
+            are not 100% fool proof at the moment.<br>
+            Searching by NAIFID is not implemented yet.<br>
+            Dependencies:</p>
+            <ul>
+              <li>bash</li>
+              <li>awk</li>
+              <li>grep</li>
+              <li>wget</li>
+            </ul>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="install" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>How to install</h2>
+          <p class="lead">Setting up the script is pretty simple.</p>
+          <ul>
+            <li>You can download the script from <a href="https://cloud.konkoly.hu/s/xJMdebsC3ZCsfeW" target="_blank">here</a>.</li>
+            <li>Set the premissions: chmod +x astname</li>
+            <li>Copy it somewhere in your $PATH, e.g. /usr/local/bin/, or $HOME/bin/</li>
+
+          </ul>
+		 <ul>
+
+		 </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="usage">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Usage</h2>
+          <p class="lead">The script accepts an integer asteroid number as argument, or an asteroid
+          name, e.g.:<br>
+          astname 64<br>
+          or:<br>
+          astname Angelina<br>
+          Use double quotes if special characters are present in the
+          astreoid name, e.g.:<br>
+          astname "Prokof'ev"<br>
+          Use double quotes also, when searching for provisional designation e.g.:<br>
+          astname "1976 YG"<br>
+          The search is not case sensitive.<br>
+          Use astname --help to print this information.<br>
+          The first time you use the script you need an active internet connection to download the index file.
+          Later, if the index file is present, but it is older than 30 days and can't be re-downloded the old file will be used.</p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Szakáts Róbert 2020-2021</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom JavaScript for this theme -->
+  <script src="js/scrolling-nav.js"></script>
+
+</body>
+
+</html>
