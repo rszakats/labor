@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="ELTE Particle, Nuclear and Astrophysics Lab description and files">
+  <meta name="author" content="Róbert Szakáts">
+
+  <title>Particle, Nuclear and Astrophysics Lab, Piszkéstető</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/scrolling-nav.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Introduction</a>
+      <a class="navbar-brand js-scroll-trigger" href="index.html">Hungarian</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#elof">Prerequisites</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#linux">Linux</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#fitsh">FITSH</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#egyeb">Other Softwares</a>
+          </li>
+		  <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#letoltes">Downloads</a>
+          </li>
+		  <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#jegyzet">Lecture Notes</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+	<div class="row" id="header">
+    <div class="col-md-3 col-md-offset-9">
+        <img src="{% static "navbar_bg.jpg" %}" alt="My image"/>
+    </div>
+</div>
+<!--
+  <header class="bg-primary text-white">
+    <div class="container text-center">
+      <h1>Welcome to Scrolling Nav</h1>
+      <p class="lead">A landing page template freshly redesigned for Bootstrap 4</p>
+    </div>
+  </header>
+-->
+
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Introduction</h2>
+          <p class="lead">This page is dedicated for the ELTE Particle, Nuclear and Astrophysics Lab, Astronomical observational exercises at Piszkéstető 2020., spring semester.
+The aim of the laboratory is to acquaint students with the basics of astronomical observations and instrumentation, and in addition, with the method of basic processing of digital astronomical measurements.
+On this webpage every preliminary information and file can be found. Because of the unforseen epidemic the excersise will be held online. </p>
+          <ul>
+            <li>Instructors: <a href="https://konkoly.hu/staff/sodor.shtml" target="_blank">Ádám Sódor</a>, <a href="https://konkoly.hu/staff/szakats.shtml" target="_blank">Róbert Szakáts</a></li>
+            <li>The excersise will be held with <a href="https://zoom.us/" target="_blank">Zoom</a></li>
+            <li>More information on the excersise can be found on the ELTE <a href="http://atomfizika.elte.hu/haladolabor/meresek#PTM" target="_blank">webpage</a>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="elof" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Prerequisites</h2>
+          <p class="lead"> </p>
+		 <ul>
+			<li>A modern Linux operating system, eg. <a href="https://www.debian.org/" target="_blank">Debian 10</a>.</li>
+			<li><a href="http://www.tldp.org/LDP/Bash-Beginners-Guide/html/" target="_blank">bash</a>
+	  		<li><a href="https://fitsh.net/" target="_blank">FITSH</a></li>
+	  		<li><a href="http://www.gnuplot.info/" target="_blank">Gnuplot</a></li>
+	  		<li><a href="https://www.linuxtechi.com/awk-command-tutorial-with-examples/" target="_blank">AWK</a></li>
+	  		<li><a href="http://ds9.si.edu/site/Home.html" target="_blank">DS9</a></li>
+	  		<li><a href="http://hea-www.harvard.edu/saord/xpa/" target="_blank">xpatools</a>
+		 </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="linux">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Linux</h2>
+          <p class="lead">It is recommended to use some linux / unix system during the exercise. If you do not want to install it as a main system, you can use it in a virtual machine.
+This system should be up-to-date. If you don't have a Linux system in a virtual machine, you can try Windows Subsystem for Linux (WSL), but this has not been tested by the instructors and we cannot help you with that. MacOS can also be used as an alternative, the programs and scripts used will most likely work on it.
+You will need 10 GB of free space on the system used for the excersise.</p>
+		  <ul>
+			<li><a href="https://distrowatch.com/" target="_blank">Linux distributions</a></li>
+			<li>A possible virtual machine solution <a href="https://www.instructables.com/id/How-to-install-Linux-on-your-Windows/" target="_blank">Virtualbox</a>-szal.</li>
+			<li><a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" target="_blank">Windows Subsystem for Linux</a></li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fitsh" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>FITSH</h2>
+          <p class="lead">During the excersise, we will use a software package called FITSH developed by András Pál for digital image processing, photometry and other additional steps. This must work on the system in order to complete the tasks. In some distributions, you can install it from the repository, but installing from the source is also a simple process. It is recommended that you read the software description and examples on its website before the lab.</p>
+		  <ul>
+			<li>The latest version can be downloaded from <a href="https://cloud.konkoly.hu/s/baR8p5iDnSc9XJF" target="_blank">here</a>.</li>
+			<li><a href="https://fitsh.net/wiki/Installation" target="_blank">Install</a></li>
+			<li><a href="https://fitsh.net/wiki/Tasks" target="_blank">Description</a> of FITHS tasks.</li>
+			<li>Few <a href="https://fitsh.net/wiki/Example:Main_Page" target="_blank">Examples</a>.</li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="egyeb">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Other Softwares</h2>
+          <p class="lead">In addition to the required software listed earlier, you may also have to use other programs. Lab instructors assume that the students have a basic knowledge of computer science, so,
+for example, moving and creating files is not a problem for them on the operating system they are using. We listed below a few applications that may be helpful.</p>
+		  <ul>
+			<li>Command line text editors: <a href="https://www.nano-editor.org/" target="_blank">GNU nano</a>, <a href="https://www.cs.colostate.edu/helpdocs/vi.html" target="_blank">vi</a></li>
+			<li>GUI text editors: <a href="https://wiki.gnome.org/Apps/Gedit" target="_blank">gedit</a>, <a href="https://en.wikipedia.org/wiki/Pluma_(editor)" target="_blank">pluma</a>, For Windows: <a href="https://notepad-plus-plus.org/" target="_blank">notepad++</a></li>
+			<li>A simple file manager: <a href="https://midnight-commander.org/" target="_blank">Midnight Commander</a>.</li>
+			<li>What is the difference between the therminal, bash and comamnd line? <a href="https://youtu.be/hMSByvFHOro" target="_blank">Video</a>.</li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="letoltes" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Downloads</h2>
+          <p class="lead"></p>
+		  <ul>
+			<li><a href="https://cloud.konkoly.hu/s/yDDLqF9ymPyRqrm" target="_blank">Raw data.</a> Approx. 1.8 GB</li>
+			<li><a href="https://cloud.konkoly.hu/s/baR8p5iDnSc9XJF" target="_blank">FITSH 0.9.3</a></li>
+			<li><a href="https://cloud.konkoly.hu/s/qwbWNB2r9j2m2nc" target="_blank">imexam</a> and <a href="https://cloud.konkoly.hu/s/4MBPfHLMiyFE4Qr" target="_blank">tvmark</a> scripts.</li>
+			<li>Introduction to <a href="https://cloud.konkoly.hu/s/Ywfr7rCDpSqapFc" target="_blank">CCD</a> processing.</li>
+			<li>Pervious lab presentation (Hungarian)<a href="https://cloud.konkoly.hu/s/6YPWFGqiHYjGyRm" target="_blank">(pdf)</a></li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section id="jegyzet">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Lecture Notes</h2>
+          <p class="lead">The Lecture Notes for the lab can be downloaded from the link below. In this, we will walk you through the basics and each step in detail. The tasks include a brief description of the specific problem and usually an example solution to that particular issue. We have highlighted the tasks to be performed by the students, which they have to solve based on their existing knowledge and the previous examples. Because the excersise will be interactive the lab instructors can help with problems encountered during the tasks. Between classes you will have the opportunity to work on the tasks alone.</p>
+		  <ul>
+			<li>The Lecture Notes can be downloaded from <a href="https://cloud.konkoly.hu/s/64cXDZoT8spANcW" target="_blank">here</a>. It is in Hungarian at the moment.</li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Szakáts Róbert 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom JavaScript for this theme -->
+  <script src="js/scrolling-nav.js"></script>
+
+</body>
+
+</html>

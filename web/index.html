@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Personal webpage of Róbert Szakáts">
+  <meta name="author" content="Róbert Szakáts">
+
+  <title>Personal webpage of Róbert Szakáts</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/scrolling-nav.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">About me</a>
+      <!-- <a class="navbar-brand js-scroll-trigger" href="index_en.html">English</a> -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#rc80sched">RC80 Scheduler</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#astname">astname</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#labor">ELTE Lab</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#egyeb">Egyéb szoftverek</a>
+          </li>
+		  <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#letoltes">Letöltések</a>
+          </li>
+		  <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#jegyzet">Jegyzet</a>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+	<div class="row" id="header">
+    <div class="col-md-3 col-md-offset-9">
+        <img src="{% static "navbar_bg.jpg" %}" alt="My image"/>
+    </div>
+</div>
+<!--
+  <header class="bg-primary text-white">
+    <div class="container text-center">
+      <h1>Welcome to Scrolling Nav</h1>
+      <p class="lead">A landing page template freshly redesigned for Bootstrap 4</p>
+    </div>
+  </header>
+-->
+
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>About me</h2>
+          <p class="lead">I'm Róbert Szakáts, an astronomer working at the Konkoly Observatory. This is my personal webpage.
+          You can find some information about me here, and also some of my public stuff.</p>
+          <ul>
+            <li>My <a href="https://konkoly.hu/staff/szakats.shtml" target="_blank">webpage</a> at konkoly.hu</li>
+            <li>My list of publications: <a href="https://ui.adsabs.harvard.edu/public-libraries/VTAK2k6jSHKA38yPJF-LGQ" target="_blank">ADS</a></li>
+            <li>My <a href="https://github.com/rszakats" target="_blank">github</a> page.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rc80sched" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>RC80 Scheduler</h2>
+          <p class="lead"><a href="rc80sched.html" target="_blank">Here</a> you can find the documentation of the scheduler for the RC80 telespcope at Piszkéstető. This
+            software is a python code written around the <a href="https://astroplan.readthedocs.io/en/latest/" target="_blank">astroplan</a> package to provide input for the automatic observing pipeline.
+           </p>
+		 <ul>
+			<!-- <li>Saját otthoni gépen futó, modern linux operációs rendszer, pl. <a href="https://www.debian.org/" target="_blank">Debian 10</a>.</li>
+			<li><a href="http://www.tldp.org/LDP/Bash-Beginners-Guide/html/" target="_blank">bash</a>
+	  		<li><a href="https://fitsh.net/" target="_blank">FITSH</a></li>
+	  		<li><a href="http://www.gnuplot.info/" target="_blank">Gnuplot</a></li>
+	  		<li><a href="https://www.linuxtechi.com/awk-command-tutorial-with-examples/" target="_blank">AWK</a></li>
+	  		<li><a href="http://ds9.si.edu/site/Home.html" target="_blank">DS9</a></li>
+	  		<li><a href="http://hea-www.harvard.edu/saord/xpa/" target="_blank">xpatools</a> -->
+		 </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="astname">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>astname</h2>
+          <p class="lead">A small script to get the asteroid number or the provisional designation of a small solar system body. More details are <a href="astname.html" target="_blank">here</a>.</p>
+		  <ul>
+			<!-- <li><a href="https://distrowatch.com/" target="_blank">Linux disztribúciók</a></li>
+			<li>Egy lehetséges virtuális gép megoldás <a href="https://www.instructables.com/id/How-to-install-Linux-on-your-Windows/" target="_blank">Virtualbox</a>-szal.</li>
+			<li><a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" target="_blank">Windows Subsystem for Linux</a></li> -->
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="labor" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>ELTE LAB</h2>
+          <p class="lead">This <a href="labor_en.html" target="_blank">page</a> is dedicated for the ELTE Particle, Nuclear and Astrophysics Lab, Astronomical observational exercises at Piszkéstető.
+The aim of the laboratory is to acquaint students with the basics of astronomical observations and instrumentation, and in addition, with the method of basic processing of digital astronomical measurements.
+On this webpage every preliminary information and file can be found.</p>
+		  <ul>
+			<!-- <li>A legfrissebb verzió letölthető <a href="https://cloud.konkoly.hu/s/baR8p5iDnSc9XJF" target="_blank">innen</a>.</li>
+			<li><a href="https://fitsh.net/wiki/Installation" target="_blank">Telepítési útmutató</a></li>
+			<li>FITSH taszkok <a href="https://fitsh.net/wiki/Tasks" target="_blank">leírása</a>.</li>
+			<li>Pár <a href="https://fitsh.net/wiki/Example:Main_Page" target="_blank">példa</a>.</li> -->
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+<!--
+  <section id="egyeb">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Egyéb szoftverek</h2>
+          <p class="lead">A korábban felsorolt szükséges szoftvereken kívül még felmerülhet a használata egyéb programoknak is. A laborvezetők feltételezik, hogy a hallgatók rendelkeznek alapszintű számítástechnikai ismeretekkel, így
+						 például fájlok mozgatása és létrehozása nem okoz nekik gondot az általuk használt operációs rendszeren. Alább felsorolunk pár olyan alkalmazást, ami hasznos lehet a gyakorlat során.</p>
+		  <ul>
+			<li>Terminálban text editorok: <a href="https://www.nano-editor.org/" target="_blank">GNU nano</a>, <a href="https://www.cs.colostate.edu/helpdocs/vi.html" target="_blank">vi</a></li>
+			<li>Grafikus text editorok: <a href="https://wiki.gnome.org/Apps/Gedit" target="_blank">gedit</a>, <a href="https://en.wikipedia.org/wiki/Pluma_(editor)" target="_blank">pluma</a>, Windowsra: <a href="https://notepad-plus-plus.org/" target="_blank">notepad++</a></li>
+			<li>Egy elég egyszerű és hatékony linux-os fájlkezelő a <a href="https://midnight-commander.org/" target="_blank">Midnight Commander</a>.</li>
+			<li>Mi a terminál, a bash és a parancssor között a különbség? <a href="https://youtu.be/hMSByvFHOro" target="_blank">Videó</a>.</li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="letoltes" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Letöltések</h2>
+          <p class="lead"></p>
+		  <ul>
+			<li><a href="https://cloud.konkoly.hu/s/yDDLqF9ymPyRqrm" target="_blank">Nyers adatok.</a> Kb. 1.8 GB</li>
+			<li><a href="https://cloud.konkoly.hu/s/baR8p5iDnSc9XJF" target="_blank">FITSH 0.9.3</a></li>
+			<li><a href="https://cloud.konkoly.hu/s/qwbWNB2r9j2m2nc" target="_blank">imexam</a> és <a href="https://cloud.konkoly.hu/s/4MBPfHLMiyFE4Qr" target="_blank">tvmark</a> szkriptek.</li>
+			<li>Bevezető a <a href="https://cloud.konkoly.hu/s/Ywfr7rCDpSqapFc" target="_blank">CCD</a> képek feldolgozásának alapjaiba.</li>
+			<li>Korábbi labor prezentáció.<a href="https://cloud.konkoly.hu/s/6YPWFGqiHYjGyRm" target="_blank">(pdf)</a></li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section id="jegyzet">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Jegyzet</h2>
+          <p class="lead">A laborhoz készített jegyzet az alább látható linken letölthető. Ebben végigvesszük az alapvető tudnivalókat és az egyes lépéseket részletesen. A feladatoknál megtalálható egy rövid leírása az adott problémának
+						és általában egy példa megoldás is az adott kérdéshez. Bizonyos helyeken külön kiemeltük a hallgatók által evégzendő feladatokat, amiket a meglévő tudásuk és a példák alapján kell megoldaniuk. Mivel az óra
+						interaktív lesz, a gyakorlatvezetők tudnak segíteni menet közben a felmerült problémákon és lehet tőlük kérdezni. Az órák között lehetőség lesz egyedül is dolgozni a feladatokon.</p>
+		  <ul>
+			<li>A jegyzet letölthető <a href="https://cloud.konkoly.hu/s/64cXDZoT8spANcW" target="_blank">innen</a>.</li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Szakáts Róbert 2020-2021</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom JavaScript for this theme -->
+  <script src="js/scrolling-nav.js"></script>
+
+</body>
+
+</html>

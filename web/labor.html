@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="ELTE haladó labor leírás és fájlok">
+  <meta name="author" content="Róbert Szakáts">
+
+  <title>ELTE haladó labor, Piszkéstető</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/scrolling-nav.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Bevezető</a>
+      <a class="navbar-brand js-scroll-trigger" href="index_en.html">English</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#elof">Előfeltételek</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#linux">Linux</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#fitsh">FITSH</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#egyeb">Egyéb szoftverek</a>
+          </li>
+		  <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#letoltes">Letöltések</a>
+          </li>
+		  <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#jegyzet">Jegyzet</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+	<div class="row" id="header">
+    <div class="col-md-3 col-md-offset-9">
+        <img src="{% static "navbar_bg.jpg" %}" alt="My image"/>
+    </div>
+</div>
+<!--
+  <header class="bg-primary text-white">
+    <div class="container text-center">
+      <h1>Welcome to Scrolling Nav</h1>
+      <p class="lead">A landing page template freshly redesigned for Bootstrap 4</p>
+    </div>
+  </header>
+-->
+
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Bevezető</h2>
+          <p class="lead">Az oldal a 2020. tavaszi félévben, Piszkéstetőn megtartandó Haladó fizika laborhoz készült.
+        	A labor célja, hogy a hallgatók megismerkedjenek a csillagászati észlelések és műszertehnika alapjaival. Ezen kívül pedig a digitális csillagászati mérések alapszintű feldolgozásának módszerével.
+		   A honlapon megtalálható minden előzetes információ és fájl. Az előre nem látott karantén miatt a gyakorlat távoktatás keretében kerül megtartásra. A pontos időpontokról és a részletekről elektronikus levélben
+			tájékoztatjuk a hallgatókat.</p>
+          <ul>
+            <li>Gyakorlatvezetők: <a href="https://konkoly.hu/staff/sodor.shtml" target="_blank">Sódor Ádám</a>, <a href="https://konkoly.hu/staff/szakats.shtml" target="_blank">Szakáts Róbert</a></li>
+            <li>A labor a <a href="https://zoom.us/" target="_blank">Zoom</a> videókonferencia szoftver segítségével lesz megtartva.</li>
+            <li>Bővebb információk a laborról a labor <a href="http://atomfizika.elte.hu/haladolabor/meresek#PTM" target="_blank">honlapján</a> találhatók.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="elof" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Előfeltételek</h2>
+          <p class="lead"> </p>
+		 <ul>
+			<li>Saját otthoni gépen futó, modern linux operációs rendszer, pl. <a href="https://www.debian.org/" target="_blank">Debian 10</a>.</li>
+			<li><a href="http://www.tldp.org/LDP/Bash-Beginners-Guide/html/" target="_blank">bash</a>
+	  		<li><a href="https://fitsh.net/" target="_blank">FITSH</a></li>
+	  		<li><a href="http://www.gnuplot.info/" target="_blank">Gnuplot</a></li>
+	  		<li><a href="https://www.linuxtechi.com/awk-command-tutorial-with-examples/" target="_blank">AWK</a></li>
+	  		<li><a href="http://ds9.si.edu/site/Home.html" target="_blank">DS9</a></li>
+	  		<li><a href="http://hea-www.harvard.edu/saord/xpa/" target="_blank">xpatools</a>
+		 </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="linux">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Linux</h2>
+          <p class="lead">A gyakorlat során ajánlott valamilyen linux/unix rendszert használni. Ha nem akarjuk fő rendszerként telepíteni, akkor virtuális gépben is használhatjuk.
+							Szintén ajánlott, hogy a rendszer valamiképp naprakész legyen. Ha virtuális gépben sincs linux rendszerünk, akkor megpróbálkozhatunk a Windows Subsystem for Linux-szal, de ez a laborvezetők által
+							nincs tesztelve és komplikációk esetén nem tudunk segíteni. Alternatívaként használható macOS is, a használt programok és scriptek nagy valószínűséggel működni fognak.
+							A használt rendszeren kb. 10 GB szabad helynek kell majd rendelkezésre állnia.</p>
+		  <ul>
+			<li><a href="https://distrowatch.com/" target="_blank">Linux disztribúciók</a></li>
+			<li>Egy lehetséges virtuális gép megoldás <a href="https://www.instructables.com/id/How-to-install-Linux-on-your-Windows/" target="_blank">Virtualbox</a>-szal.</li>
+			<li><a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" target="_blank">Windows Subsystem for Linux</a></li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fitsh" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>FITSH</h2>
+          <p class="lead">A labor során a digitális képfeldolgozáshoz, a fotometriához és egyéb kiegészítő lépésekhez a Pál András által fejlesztett FITSH nevű szoftvercsomagot fogjuk használni. Ennek mindenképpen működnie kell a rendszeren ahhoz, hogy
+						  tudjunk dolgozni. Bizonyos disztribúciókban repóból lehet telepíteni, de a forrásból telepítés is egyszerű folyamat. Ajánlott a labor előtt átnézni a szoftver leírását és a honlapján bemutatott példákat.</p>
+		  <ul>
+			<li>A legfrissebb verzió letölthető <a href="https://cloud.konkoly.hu/s/baR8p5iDnSc9XJF" target="_blank">innen</a>.</li>
+			<li><a href="https://fitsh.net/wiki/Installation" target="_blank">Telepítési útmutató</a></li>
+			<li>FITSH taszkok <a href="https://fitsh.net/wiki/Tasks" target="_blank">leírása</a>.</li>
+			<li>Pár <a href="https://fitsh.net/wiki/Example:Main_Page" target="_blank">példa</a>.</li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="egyeb">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Egyéb szoftverek</h2>
+          <p class="lead">A korábban felsorolt szükséges szoftvereken kívül még felmerülhet a használata egyéb programoknak is. A laborvezetők feltételezik, hogy a hallgatók rendelkeznek alapszintű számítástechnikai ismeretekkel, így
+						 például fájlok mozgatása és létrehozása nem okoz nekik gondot az általuk használt operációs rendszeren. Alább felsorolunk pár olyan alkalmazást, ami hasznos lehet a gyakorlat során.</p>
+		  <ul>
+			<li>Terminálban text editorok: <a href="https://www.nano-editor.org/" target="_blank">GNU nano</a>, <a href="https://www.cs.colostate.edu/helpdocs/vi.html" target="_blank">vi</a></li>
+			<li>Grafikus text editorok: <a href="https://wiki.gnome.org/Apps/Gedit" target="_blank">gedit</a>, <a href="https://en.wikipedia.org/wiki/Pluma_(editor)" target="_blank">pluma</a>, Windowsra: <a href="https://notepad-plus-plus.org/" target="_blank">notepad++</a></li>
+			<li>Egy elég egyszerű és hatékony linux-os fájlkezelő a <a href="https://midnight-commander.org/" target="_blank">Midnight Commander</a>.</li>
+			<li>Mi a terminál, a bash és a parancssor között a különbség? <a href="https://youtu.be/hMSByvFHOro" target="_blank">Videó</a>.</li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="letoltes" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Letöltések</h2>
+          <p class="lead"></p>
+		  <ul>
+			<li><a href="https://cloud.konkoly.hu/s/yDDLqF9ymPyRqrm" target="_blank">Nyers adatok.</a> Kb. 1.8 GB</li>
+			<li><a href="https://cloud.konkoly.hu/s/baR8p5iDnSc9XJF" target="_blank">FITSH 0.9.3</a></li>
+			<li><a href="https://cloud.konkoly.hu/s/qwbWNB2r9j2m2nc" target="_blank">imexam</a> és <a href="https://cloud.konkoly.hu/s/4MBPfHLMiyFE4Qr" target="_blank">tvmark</a> szkriptek.</li>
+			<li>Bevezető a <a href="https://cloud.konkoly.hu/s/Ywfr7rCDpSqapFc" target="_blank">CCD</a> képek feldolgozásának alapjaiba.</li>
+			<li>Korábbi labor prezentáció.<a href="https://cloud.konkoly.hu/s/6YPWFGqiHYjGyRm" target="_blank">(pdf)</a></li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section id="jegyzet">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Jegyzet</h2>
+          <p class="lead">A laborhoz készített jegyzet az alább látható linken letölthető. Ebben végigvesszük az alapvető tudnivalókat és az egyes lépéseket részletesen. A feladatoknál megtalálható egy rövid leírása az adott problémának
+						és általában egy példa megoldás is az adott kérdéshez. Bizonyos helyeken külön kiemeltük a hallgatók által evégzendő feladatokat, amiket a meglévő tudásuk és a példák alapján kell megoldaniuk. Mivel az óra
+						interaktív lesz, a gyakorlatvezetők tudnak segíteni menet közben a felmerült problémákon és lehet tőlük kérdezni. Az órák között lehetőség lesz egyedül is dolgozni a feladatokon.</p>
+		  <ul>
+			<li>A jegyzet letölthető <a href="https://cloud.konkoly.hu/s/64cXDZoT8spANcW" target="_blank">innen</a>.</li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Szakáts Róbert 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom JavaScript for this theme -->
+  <script src="js/scrolling-nav.js"></script>
+
+</body>
+
+</html>

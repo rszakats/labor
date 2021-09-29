@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Documentation of the RC80 Scheduler">
+  <meta name="author" content="Róbert Szakáts">
+
+  <title>RC80 Scheduler</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/scrolling-nav.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="index.html">Main page</a>
+      <!-- <a class="navbar-brand js-scroll-trigger" href="index_en.html">English</a> -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#page-top">RC80 Scheduler</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#basic">Basic concepts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#req">Requirements</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#inst">Installation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#usage">Usage</a>
+          </li>
+<!--
+		  <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#credits">Credits</a>
+          </li> -->
+          <!--
+		  <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#jegyzet">Jegyzet</a>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+	<div class="row" id="header">
+    <div class="col-md-3 col-md-offset-9">
+        <img src="{% static "navbar_bg.jpg" %}" alt="My image"/>
+    </div>
+</div>
+<!--
+  <header class="bg-primary text-white">
+    <div class="container text-center">
+      <h1>Welcome to Scrolling Nav</h1>
+      <p class="lead">A landing page template freshly redesigned for Bootstrap 4</p>
+    </div>
+  </header>
+-->
+
+  <section id="page-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>RC80 Scheduler</h2>
+          <p class="lead">A simple sequential scheduler for the RC80 telescope at Piszkéstető. It uses the <a href="https://astroplan.readthedocs.io/en/latest/" target="_blank">astroplan</a> package and a modified class of SequentialScheduler.
+            Besides the default constrains it uses the ForbiddenPositionConstraint and ForestConstraint especially designed for this telescope.
+          Performs a very primitive input file check. If a line is not valid, it will be rejected from the input.
+          If plotting is enabled it creates two plots with the scheduled objects.
+          The modified SequentialScheduler Class and the plot_constraints (in debug mode) uses multiprocessing, to speed up schedule and plot generation.</p>
+          <ul>
+            <li>The current altitude plot with object priorities: <a href="https://ccdsh.konkoly.hu/img/rc80/schedule.png" target="_blank">plot</a></li>
+            <li>The current altitude plot with object altitudes: <a href="https://ccdsh.konkoly.hu/img/rc80/schedule_altitude.png" target="_blank">plot</a></li>
+            <li>More information about the RC80 telescope and its systems: <a href="https://ccdsh.konkoly.hu/wiki/TAO:Main_Page" target="_blank">ccdsh wiki</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="basic" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Basic concepts</h2>
+          <p class="lead">
+            For the quasi robotic use of the RC80 telescope an automatic observing script generator pipeline was made. The main part of this was written in bash, by Levente Kriskovics and this bash pipeline uses the scheduler script for determining the final list of obejcts for the telescope.
+            <li>The first step is to query the SQL database of the active <a href="https://ccdsh.konkoly.hu/supernovae" target="_blank">target list</a>. A pre-filtering is done in this step, namely, if the target is in the scheduled interval, it gets in to the list. If the target's last time of observation is greater, than its observing cadence, it gets in to the list.</li>
+            <li>From the list of these filtered targets an input file is generated for the scheduler. It contains the name, the ra-dec coordinates, the net observing time and the priority of the objects.</li>
+            <li>If the night is full with scheduled objects, or the script run out of input objects, the results are written into an output file.</li>
+            <li>The scheduler processes this input file and based on the priority and the different constraints it will perform a simple sequential scheduling. It means, that it calculates the constraints for every target for the first time block and the best one is picked. Then, for the second block the process repeats, except the already scheduled target, etc. First the higher priority targets are scheduled for one time slot, and after the lower ones. Lower priority numbers means higher priority.
+            <li>The bash pipeline then converts the output file to a <a href="https://ccdsh.konkoly.hu/static/doc/ccdsh-0.8.0.pdf" target="_blank">ccdsh</a> script, which then can be sourced or piped to the ccdsh enviroment on m51.</li>
+            <li>With high enough number of targets usually there are no gaps in the schedule. If gaps are present, based on how long they are the telescope can close temporarly.</li>
+            <li>The used constraints are:
+              <ul>
+                <li>AtNightConstraint.twilight_nautical(): schedules targets only when the Sun is below -12 degrees. It can be overridden by the <i>use-the-force-luke= </i> option to a lower Sun altitude for the end of the night.</li></li>
+                <li>AltitudeConstraint: Rejects the target for the time slot if it is not between the given altitudes above horizon. The default values are 20 and 80 degrees.</li>
+                <li>MoonSeparationConstraint: Rejects the target for the time slot if its separation from the Moon is smaller than the given value. The default is 25 degrees.</li>
+                <li>ForbiddenPositionConstraint: Rejects the target for the time slot if it is in the forbidden zone of the telescope. This is between -12.0 and -9.0 degrees azimuth, and above 48.0 degree altitude </li>
+                <li>ForestConstraint: It is basically a horizon constraint, which was measured by András Pál. The constraint uses an input file with the
+                azimuth and altitude data of the trees near the RC80 telescope dome. If the target at the time slot is visible below the altitude value at a given azimuth, the target will be rejected.</li>
+              </ul>
+              <li>If plotting is enabled two plots will be generated. One is a simple plot with time on the x axis and average altitude of the target during the planned observation on the y axis. The target priorities are also present here.
+                The second plot is an all night altitude plot with the scheduled targets and their altitude above the horizont during the night. The latest of these plots are
+                available <a href="https://ccdsh.konkoly.hu/img/rc80/schedule.png" target="_blank">here</a> and <a href="https://ccdsh.konkoly.hu/img/rc80/schedule_altitude.png" target="_blank">here</a>, and they also generated in the directory where the TCS script was ran.</li>
+           </p>
+		 <ul>
+			<!-- <li>Saját otthoni gépen futó, modern linux operációs rendszer, pl. <a href="https://www.debian.org/" target="_blank">Debian 10</a>.</li>
+			<li><a href="http://www.tldp.org/LDP/Bash-Beginners-Guide/html/" target="_blank">bash</a>
+	  		<li><a href="https://fitsh.net/" target="_blank">FITSH</a></li>
+	  		<li><a href="http://www.gnuplot.info/" target="_blank">Gnuplot</a></li>
+	  		<li><a href="https://www.linuxtechi.com/awk-command-tutorial-with-examples/" target="_blank">AWK</a></li>
+	  		<li><a href="http://ds9.si.edu/site/Home.html" target="_blank">DS9</a></li>
+	  		<li><a href="http://hea-www.harvard.edu/saord/xpa/" target="_blank">xpatools</a> -->
+		 </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="req">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Requirements</h2>
+          <p class="lead"></p>
+		  <ul>
+			<li>python3.8</li>
+			<li>astropy-4.0.2</li>
+			<li>astroplan-0.8</li>
+      <li>numpy-1.17</li>
+      <li>matplotlib-3.0.3</li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="inst" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Installation</h2>
+          <p class="lead">You usually don't have to do anything to get it work on m51. In case there is an installation needed, follow these steps:
+            <li>Copy rc80_scheduler.py and rc80-horizon.txt from:
+            m51:/data/rszakats/scheduler/2.x
+            to:
+            /usr/local/bin/tcs80/</li>
+
+            <li>Symlink /data/rszakats/scheduler/2.x/constraints.py to
+            /data/rszakats/python3.8/lib/python3.8/site-packages/astroplan/</li>
+
+            <li>Symlink /data/rszakats/scheduler/2.x/scheduling.py to
+            /data/rszakats/python3.8/lib/python3.8/site-packages/astroplan/</li></p>
+		  <ul>
+			<!-- <li>A legfrissebb verzió letölthető <a href="https://cloud.konkoly.hu/s/baR8p5iDnSc9XJF" target="_blank">innen</a>.</li>
+			<li><a href="https://fitsh.net/wiki/Installation" target="_blank">Telepítési útmutató</a></li>
+			<li>FITSH taszkok <a href="https://fitsh.net/wiki/Tasks" target="_blank">leírása</a>.</li>
+			<li>Pár <a href="https://fitsh.net/wiki/Example:Main_Page" target="_blank">példa</a>.</li> -->
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="usage">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Usage</h2>
+          <p class="lead">
+          Usually you don't have to run the scheduler on its own. Run the full pipeline with the <i>TCS80_generate.sh --start now --sequential --focus 7.95 --plot</i> command on m51. If you want a more detaild output you can use the <i>--verbose</i> switch, or if you suspect an error, use the <i>--debug</i> switch too. You can find more information about the usage of these scripts <a href="https://ccdsh.konkoly.hu/wiki/TAO:RC80_with_scheduler" target="_blank">here</a></p>
+		  <ul>
+			<li>If you want to run the scheduler script in a standalone mode, run it with the correct python version:
+      /data/rszakats/python3.8/bin/python3.8 rc80_scheduler.py</li>
+			<li>To get help, use the <i>--help</i> switch.</li>
+			<li>In standalone mode you have to provide an input file with the following columns: name ra dec exp pri</li>
+			<li>Specify this file with the <i>--infile=</i> switch</li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+<!--
+  <section id="letoltes" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Letöltések</h2>
+          <p class="lead"></p>
+		  <ul>
+			<li><a href="https://cloud.konkoly.hu/s/yDDLqF9ymPyRqrm" target="_blank">Nyers adatok.</a> Kb. 1.8 GB</li>
+			<li><a href="https://cloud.konkoly.hu/s/baR8p5iDnSc9XJF" target="_blank">FITSH 0.9.3</a></li>
+			<li><a href="https://cloud.konkoly.hu/s/qwbWNB2r9j2m2nc" target="_blank">imexam</a> és <a href="https://cloud.konkoly.hu/s/4MBPfHLMiyFE4Qr" target="_blank">tvmark</a> szkriptek.</li>
+			<li>Bevezető a <a href="https://cloud.konkoly.hu/s/Ywfr7rCDpSqapFc" target="_blank">CCD</a> képek feldolgozásának alapjaiba.</li>
+			<li>Korábbi labor prezentáció.<a href="https://cloud.konkoly.hu/s/6YPWFGqiHYjGyRm" target="_blank">(pdf)</a></li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section id="jegyzet">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Jegyzet</h2>
+          <p class="lead">A laborhoz készített jegyzet az alább látható linken letölthető. Ebben végigvesszük az alapvető tudnivalókat és az egyes lépéseket részletesen. A feladatoknál megtalálható egy rövid leírása az adott problémának
+						és általában egy példa megoldás is az adott kérdéshez. Bizonyos helyeken külön kiemeltük a hallgatók által evégzendő feladatokat, amiket a meglévő tudásuk és a példák alapján kell megoldaniuk. Mivel az óra
+						interaktív lesz, a gyakorlatvezetők tudnak segíteni menet közben a felmerült problémákon és lehet tőlük kérdezni. Az órák között lehetőség lesz egyedül is dolgozni a feladatokon.</p>
+		  <ul>
+			<li>A jegyzet letölthető <a href="https://cloud.konkoly.hu/s/64cXDZoT8spANcW" target="_blank">innen</a>.</li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Szakáts Róbert 2020-2021</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom JavaScript for this theme -->
+  <script src="js/scrolling-nav.js"></script>
+
+</body>
+
+</html>
