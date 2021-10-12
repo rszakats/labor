@@ -65,7 +65,7 @@ def printProgressBar(iteration, total, prefix='', suffix='', decimals=1,
 
 
 # Set working directory
-wdir = "/home/rszakats/munka/labor/python/"
+wdir = "/data/munka/labor/data/"
 os.chdir(wdir)
 if os.path.exists('master') is False:
     os.mkdir('master')
@@ -384,10 +384,10 @@ for i in range(len(comps)):
         plt.hlines(median, np.min(time-2450000), np.max(time-2450000))
         label = f"comp {i} - comp 0"
         fname = f"compcheck{i}-{0}"
-    print(f"Standard deviation of points: {label} : {std:2.4}")  # format %2.4
+    print(f"Standard deviation of points: {label} : {std:.4f}")  # format %2.4
     plt.gca().invert_yaxis()
     plt.xlabel('JD')
-    plt.title("std: "+str(std))
+    plt.title("std: "+str(f"{std:.5f}"))
     plt.ylabel(label)
     plt.savefig(f"cal/{fname}")
     plt.show()
