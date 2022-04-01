@@ -302,7 +302,7 @@ def do_phot(ifile, xs, ys, radii, i, ids):
         flux_bkgsub = phot['aperture_sum_'+str(j)] - bkg_sum
         phot['aperture_sum_bkgsub_'+str(j)] = flux_bkgsub  # Update table
     result = np.array([jd])  # Convert JD to array
-    printProgressBar(i+1, l, prefix='Progress:', suffix='Complete',
+    printProgressBar(i+1, len(objlist), prefix='Progress:', suffix='Complete',
                      length=50)
     phot.write('cal/'+str(ifile).replace('.fits', '.phot'),
                format='ascii', overwrite=True)
@@ -458,6 +458,7 @@ if __name__ == "__main__":
 
     # Determining FWHM from image with imexam
     if os.path.exists('cal/fwhm.dat') is False:
+        print("Getting FWHM from visual inspect! Press j or k.")
         viewer = imexam.connect()
         time.sleep(3)
         viewer.load_fits("cal/"+objlist['fname'][0])
@@ -504,6 +505,7 @@ if __name__ == "__main__":
     # If the list does not exist we plot the first frame and the sources on it
     # in ds9.
     if os.path.exists('cal/ids.dat') is False:
+        print("Selecting comparison stars! Press q to exit imexam.")
         viewer = imexam.connect()
         time.sleep(3)
         viewer.load_fits('cal/'+str(objlist['fname'][0]))
