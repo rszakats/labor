@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.8
 """
 Simple aperture photometry script inspired by Attila Bódi's Python for
 Astronomers lectures, especially this presentation:
@@ -15,10 +15,9 @@ filter, etc.
 The script creates the master bias, then the master dark(s) and master flat(s).
 Then, the object frames are processed. For this parallel processing is used.
 All the available CPU cores are utilized for this. For machines with smaller
-amount of RAM this is not recommended. In this case change
-pool = mp.Pool(mp.cpu_count())
-to
-pool = mp.Pool(4), or a smaller number.
+amount of RAM this is not recommended. Now if the available system RAM is 
+lesser than 16000000000 bytes, the cpu_count is set to 4, and if it is lesser
+than 8000000000 bytes, is set to 2.
 
 During this process the object frames are trimmed and registered to a reference
 image.
@@ -87,6 +86,9 @@ from photutils.utils import calc_total_error
 import matplotlib.pyplot as plt
 import multiprocessing as mp
 import warnings
+import psutil
+# import astroalign as aa
+from astropy.time import Time
 warnings.filterwarnings("ignore")
 
 
@@ -125,7 +127,7 @@ def printProgressBar(iteration, total, prefix='', suffix='', decimals=1,
 ###############################################################################
 
 
-def process_object_frames(ofile, ref_image_data, mbias, i, ll):
+def process_object_frames(ofile, ref_image_data, mbias, i, ll, trim=False):
     """
 
     Parameters
@@ -140,6 +142,8 @@ def process_object_frames(ofile, ref_image_data, mbias, i, ll):
         Loop variable for progress bar.
     l : integer
         Length of object list for progress bar.
+    trim: boolean
+        Trim the iamge or not.
 
     Returns
     -------
@@ -158,18 +162,22 @@ def process_object_frames(ofile, ref_image_data, mbias, i, ll):
         hdu_f = fits.open('master/flat'+str(filt)+'.fits')
         mflat = hdu_f[0].data
         data = hdu[0].data
+        # print(f"{data.shape}")
         data_c = (data - mdark - mbias)
         data_c /= (mflat/mflat.max())
         # Trim calibrated images
-        data_c = ccdproc.trim_image(CCDData(data_c, unit=u.adu),
-                                    fits_section='[1400:2650, 1400:2650 ]')
+        if trim:
+            data_c = ccdproc.trim_image(CCDData(data_c, unit=u.adu),
+                                        fits_section='[1400:2650, 1400:2650 ]')
         # Image registration. First image is the reference.
+        # data_c, footprint = aa.register(data_c, ref_image_data,
+        #                                      detection_sigma=3.0)
         mean, median, std = sigma_clipped_stats(data_c, sigma=3.0)
         xoff, yoff, exoff, eyoff = chi2_shift(ref_image_data, data_c,
                                               mean,
                                               return_error=True,
                                               upsample_factor=1)
-        # upsample_factor='auto' causes artifacts around bright sources
+        # # upsample_factor='auto' causes artifacts around bright sources
         data_c = shift.shiftnd(data_c, (-yoff, -xoff))
 
         hdu = fits.PrimaryHDU(data_c, header=header)
@@ -216,11 +224,12 @@ def get_aperture(xs, ys, radii, r_in, r_out):
     bkg2D = Background2D(data, (25, 25), filter_size=(3, 3),
                          sigma_clip=sigma_clip,
                          bkg_estimator=bkg_estimator)
+    # print(f"bkg2D, bkg2D.background: \n {bkg2D} \n {bkg2D.background.shape}")
     error = calc_total_error(data, bkg2D.background, effective_gain)
     phot = aperture_photometry(data, apertures, error=error)
     bkg = aperture_photometry(data, bkg_apertures, error=error)
     bkg_mean = bkg['aperture_sum'] / bkg_apertures.area
-
+    # print(f"Radii: {radii}")
     for j in range(len(radii)):
         # Substracting area proportional background from apertures
         bkg_sum = bkg_mean * apertures[j].area
@@ -273,14 +282,21 @@ def do_phot(ifile, xs, ys, radii, i, ids):
     Returns
     -------
     result : array
-        Returns the JD and the background substracted fluxes for the selected
-        stars and aperture number.
+        Returns the JD, filter and the background substracted fluxes for the 
+        selected stars and aperture number.
 
     """
     hdu = fits.open('cal/'+str(ifile))
     data = hdu[0].data
     header = hdu[0].header
-    jd = header['jd']  # Getting julian date from header
+    try:
+        jd = header['jd']  # Getting julian date from header
+    except Exception as e:
+        # print(e)
+        times = header['DATE-OBS']+ " " + header['TIME-OBS']
+        times = Time(times, format='iso', scale='utc')
+        jd = times.jd
+    filt = header['filter']
     positions = np.transpose((xs, ys))
     apertures = [CircularAperture(positions, r=r) for r in radii]
     bkg_apertures = CircularAnnulus(positions, r_in=r_in, r_out=r_out)
@@ -302,6 +318,7 @@ def do_phot(ifile, xs, ys, radii, i, ids):
         flux_bkgsub = phot['aperture_sum_'+str(j)] - bkg_sum
         phot['aperture_sum_bkgsub_'+str(j)] = flux_bkgsub  # Update table
     result = np.array([jd])  # Convert JD to array
+    filts = np.array([filt])
     printProgressBar(i+1, len(objlist), prefix='Progress:', suffix='Complete',
                      length=50)
     phot.write('cal/'+str(ifile).replace('.fits', '.phot'),
@@ -311,6 +328,7 @@ def do_phot(ifile, xs, ys, radii, i, ids):
         result = np.hstack((result,
                             phot['aperture_sum_bkgsub_'+str(apnum)][ID],
                             phot['aperture_sum_err_'+str(apnum)][ID]))
+    result = np.hstack((result, filts))
     return result
 
 
@@ -322,6 +340,8 @@ if __name__ == "__main__":
     argumentList = fullCmdArguments[1:]
     unixOptions = "h:wd"
     gnuOptions = ["help", "wdir="]
+    trim = False
+    filtering = False
 
     try:
         arguments, values = getopt.getopt(
@@ -373,6 +393,8 @@ if __name__ == "__main__":
     darklist = info[np.where(info['itype'] == 'dark')]
     flatlist = info[np.where(info['itype'] == 'flat')]
     objlist = info[np.where(info['itype'] == 'object')]
+    # Remove this line in case of 1 filter:
+    # objlist = objlist[np.where(objlist['filter'] == 'B')]
 
     # Master bias
     if os.path.exists('master/mbias.fits') is False:
@@ -413,25 +435,33 @@ if __name__ == "__main__":
     filters = np.unique(flatlist['filter'])
 
     # Master flat(s)
-    for filter in filters:
-        if os.path.exists('master/flat'+str(filter)+'.fits') is False:
-            print(f"Creating master flat for {filter} filter")
+    for filt in filters:
+        if os.path.exists('master/flat'+str(filt)+'.fits') is False:
+            print(f"Creating master flat for {filt} filter")
             if 'mbias' not in locals():
                 hdul = fits.open('master/mbias.fits')
                 mbias = hdul[0].data
             flats = []
-            flist = flatlist[np.where(flatlist['filter'] == filter)]
+            flist = flatlist[np.where(flatlist['filter'] == filt)]
             for i in range(len(flist)):
                 hdu = fits.open(flist['fname'][i])
                 exp = hdu[0].header['exptime']
-                hdul_d = fits.open('master/dark'+str(exp)+'.fits')
+                if os.path.exists('master/dark'+str(exp)+'.fits'):
+                    hdul_d = fits.open('master/dark'+str(exp)+'.fits')
+                    ratio = 1.
+                else:
+                    hdul_d = fits.open('master/dark'+str(exps[0])+'.fits')
+                    ratio = exp/exps[0]
+                    # print(f"ratio: {ratio}")
+                    # hdul_d *= ratio 
                 mdark = hdul_d[0].data
+                mdark *= ratio
                 flats.append(hdu[0].data - mdark - mbias)
             mflat = np.median(flats, axis=0)
             hdu = fits.PrimaryHDU(mflat)
-            hdu.writeto('master/flat'+str(filter)+'.fits')
+            hdu.writeto('master/flat'+str(filt)+'.fits')
         else:
-            print(f"Master flat for {filter} filter is already present.")
+            print(f"Master flat for {filt} filter is already present.")
 
     # Correcting object frames for bias, dark and flat
     print("Processing object frames.")
@@ -442,12 +472,24 @@ if __name__ == "__main__":
     results = []
     hdu_ref = fits.open(objlist['fname'][0])
     ref_image_data = hdu_ref[0].data
-    ref_image_data = ccdproc.trim_image(
-        CCDData(ref_image_data, unit=u.adu),
-        fits_section='[1400:2650, 1400:2650 ]')
+    if trim:
+        ref_image_data = ccdproc.trim_image(
+            CCDData(ref_image_data, unit=u.adu),
+            fits_section='[1400:2650, 1400:2650 ]')
 
-    # pool = mp.Pool(4)
-    pool = mp.Pool(mp.cpu_count())
+    if psutil.virtual_memory()[1] > 16000000000.:
+        tc = mp.cpu_count() - 1
+        
+    else:
+        if psutil.virtual_memory()[1] > 8000000000.:
+            if mp.cpu_count() > 4:
+                tc = 4
+                
+        else:
+            tc = 2
+    pool = mp.Pool(tc)
+    print(f"Utilizing {tc} threads.")
+    
     result_objects = [pool.apply_async(process_object_frames, args=(
         ofile, ref_image_data, mbias, i, ll))
         for i, ofile in enumerate(objlist['fname'])]
@@ -486,8 +528,9 @@ if __name__ == "__main__":
         sources[col].info.format = '%.8g'
 
     # Filtering out too faint and too bright sources
-    sources = sources[np.where((sources['peak'] > 1000.0) &
-                               (sources['peak'] < 40000.0))]
+    if filtering:
+        sources = sources[np.where((sources['peak'] > 1000.0) &
+                                   (sources['peak'] < 40000.0))]
 
     # Fixing ids
     for i in range(1, len(sources)):
@@ -520,6 +563,27 @@ if __name__ == "__main__":
         ids.append(int(input()))
         x.append(sources['xcentroid'][np.where(sources['id'] == ids[0])][0])
         y.append(sources['ycentroid'][np.where(sources['id'] == ids[0])][0])
+        dist = (np.sqrt(((sources['xcentroid']-x[0])**2)+
+                       ((sources['ycentroid']-y[0])**2)) < 4100.)
+        brightest = sources[dist]
+        brightest.sort('flux')
+        brightest.reverse()
+        print(f"Number of filtered sources: {len(brightest)}\n"
+              f"{brightest[0:12]}")
+
+        locations = []
+        for point in range(0, len(brightest['xcentroid']), 1):
+            locations.append((brightest['xcentroid'][point],
+                              brightest['ycentroid'][point],
+                              brightest['id'][point]))
+        print("Selecting comparison stars! Press q to exit imexam.")
+        viewer = imexam.connect()
+        time.sleep(3)
+        viewer.load_fits('cal/'+str(objlist['fname'][0]))
+        viewer.scale()
+        viewer.mark_region_from_array(locations)
+        viewer.imexam()
+
         for i in range(1, 7):
             print(f"Type the number of the {i}. comparison star:")
             ids.append(int(input()))
@@ -547,7 +611,7 @@ if __name__ == "__main__":
 
     apnum = get_aperture(sources['xcentroid'],
                          sources['ycentroid'], radii, r_in, r_out)
-
+    print(f"Utilizing {mp.cpu_count()} threads.")
     pool = mp.Pool(mp.cpu_count())
     result_objects = [pool.apply_async(do_phot, args=(
         ifile, sources['xcentroid'], sources['ycentroid'], radii, i, ids))
@@ -557,6 +621,7 @@ if __name__ == "__main__":
     results = [r.get() for r in result_objects]
     pool.close()
     pool.join()
+    # print(f"results:\n {results}")
 
     for i, result in enumerate(results):
         if i == 0:
@@ -565,69 +630,79 @@ if __name__ == "__main__":
         else:
             lc = np.vstack((lc, result))  # Append to array
     # Writing lightcurve data to file.
-    np.savetxt('cal/lc.dat', lc, fmt='%10.6f')
-    time = lc[:, 0]
-    comp1 = lc[:, 3]
-    comp1err = lc[:, 4]
-    comp2 = lc[:, 5]
-    comp2err = lc[:, 6]
-    comp3 = lc[:, 7]
-    comp3err = lc[:, 8]
-    comp4 = lc[:, 9]
-    comp4err = lc[:, 10]
-    comp5 = lc[:, 11]
-    comp5err = lc[:, 12]
-    comp6 = lc[:, 13]
-    comp6err = lc[:, 14]
-    var = lc[:, 1]
-    varerr = lc[:, 2]
-
-    comp = (comp1+comp2+comp3+comp4+comp5+comp6)/6.  # Mean of comp stars
-    comp_err = 1.0857*((comp1err+comp2err+comp3err+comp4err +
-                        comp5err+comp6err) /
-                       (comp1+comp2+comp3+comp4+comp5+comp6))
-    var_mag_corr = flux2mag(var)-flux2mag(comp)  # Differential mag
-    var_mag_err = 1.0857*(varerr/var)
-    comps = [comp1, comp2, comp3, comp4, comp5, comp6]
-    # Plotting the comp check plots.
-    # If one of the comparison stars is not ~constant we need to select an
-    # other one insted of that. We plot the median and write the standard
-    # deviation of the points to the title. Smaller std is (usually) better.
-    for i in range(len(comps)):
-        if i < 5:
-            plt.plot(time-2450000,
-                     flux2mag(comps[i])-flux2mag(comps[i+1]), '.')
-            mean, median, std = sigma_clipped_stats(flux2mag(comps[i]) -
-                                                    flux2mag(comps[i+1]),
-                                                    sigma=3.0)
-            plt.hlines(median, np.min(time-2450000), np.max(time-2450000))
-            label = f"comp {i} - comp {i+1}"
-            fname = f"compcheck{i}-{i+1}"
-        else:
-            plt.plot(time-2450000, flux2mag(comps[i])-flux2mag(comps[0]), '.')
-            mean, median, std = sigma_clipped_stats(flux2mag(comps[i]) -
-                                                    flux2mag(comps[0]),
-                                                    sigma=3.0)
-            plt.hlines(median, np.min(time-2450000), np.max(time-2450000))
-            label = f"comp {i} - comp 0"
-            fname = f"compcheck{i}-{0}"
-        # format %2.4
-        print(f"Standard deviation of points: {label} : {std:.4f}")
+    # print(lc[0])
+    # np.savetxt('cal/lc.dat', lc)
+               #, fmt='%10.6f')
+    lct = Table(lc)
+    lct.write('cal/lc.dat', format='ascii', overwrite=True)
+    for filt in filters:
+        lcp = lc[np.where(lct['col15'] == filt)]
+        time = lcp[:, 0].astype(float)
+        comp1 = lcp[:, 3].astype(float)
+        comp1err = lcp[:, 4].astype(float)
+        comp2 = lcp[:, 5].astype(float)
+        comp2err = lcp[:, 6].astype(float)
+        comp3 = lcp[:, 7].astype(float)
+        comp3err = lcp[:, 8].astype(float)
+        comp4 = lcp[:, 9].astype(float)
+        comp4err = lcp[:, 10].astype(float)
+        comp5 = lcp[:, 11].astype(float)
+        comp5err = lcp[:, 12].astype(float)
+        comp6 = lcp[:, 13].astype(float)
+        comp6err = lcp[:, 14].astype(float)
+        var = lcp[:, 1].astype(float)
+        varerr = lcp[:, 2].astype(float)
+    
+        comp = (comp1+comp2+comp3+comp4+comp5+comp6)/6.  # Mean of comp stars
+        comp_err = 1.0857*((comp1err+comp2err+comp3err+comp4err +
+                            comp5err+comp6err) /
+                           (comp1+comp2+comp3+comp4+comp5+comp6))
+        var_mag_corr = flux2mag(var)-flux2mag(comp)  # Differential mag
+        var_mag_err = 1.0857*(varerr/var)
+        comps = [comp1, comp2, comp3, comp4, comp5, comp6]
+        # Plotting the comp check plots.
+        # If one of the comparison stars is not ~constant we need to select an
+        # other one insted of that. We plot the median and write the standard
+        # deviation of the points to the title. Smaller std is (usually) better.
+        print("\n")
+        for i in range(len(comps)):
+            if i < 5:
+                plt.plot(time-2450000,
+                         flux2mag(comps[i])-flux2mag(comps[i+1]), '.')
+                mean, median, std = sigma_clipped_stats(flux2mag(comps[i]) -
+                                                        flux2mag(comps[i+1]),
+                                                        sigma=3.0)
+                plt.hlines(median, np.min(time-2450000), np.max(time-2450000))
+                label = f"comp {i} - comp {i+1} {filt}"
+                fname = f"compcheck_{filt}_{i}-{i+1}"
+            else:
+                plt.plot(time-2450000, flux2mag(comps[i])-flux2mag(comps[0]), '.')
+                mean, median, std = sigma_clipped_stats(flux2mag(comps[i]) -
+                                                        flux2mag(comps[0]),
+                                                        sigma=3.0)
+                plt.hlines(median, np.min(time-2450000), np.max(time-2450000))
+                label = f"comp {i} - comp 0 {filt}"
+                fname = f"compcheck_{filt}_{i}-{0}"
+            # format %2.4
+            print(f"Standard deviation of points: {label} : {std:.4f}")
+            plt.gca().invert_yaxis()
+            plt.xlabel('JD')
+            plt.title("std: "+str(f"{std:.5f}"))
+            plt.ylabel(label)
+            plt.savefig(f"cal/{fname}", dpi=150)
+            plt.show()
+    
+        # Plotting the differential lightcurve of the target. We used an artifical
+        # comparison star made from the 6 selected comparison star's flux.
+        hdu = fits.open(objlist['fname'][0])
+        header = hdu[0].header
+        target = header['object']
+        plt.plot(time-2450000, var_mag_corr, '.')
+        plt.errorbar(time-2450000, var_mag_corr,
+                     yerr=np.sqrt(var_mag_err**2 + comp_err**2), fmt='.')
         plt.gca().invert_yaxis()
         plt.xlabel('JD')
-        plt.title("std: "+str(f"{std:.5f}"))
-        plt.ylabel(label)
-        plt.savefig(f"cal/{fname}", dpi=150)
+        plt.ylabel('Differential Instrumental Magnitude')
+        plt.title(f"{target} {filt}")
+        plt.savefig(f'cal/{target}_{filt}_lc.png', dpi=150)
         plt.show()
-
-    # Plotting the differential lightcurve of the target. We used an artifical
-    # comparison star made from the 6 selected comparison star's flux.
-    plt.plot(time-2450000, var_mag_corr, '.')
-    plt.errorbar(time-2450000, var_mag_corr,
-                 yerr=np.sqrt(var_mag_err**2 + comp_err**2), fmt='.')
-    plt.gca().invert_yaxis()
-    plt.xlabel('JD')
-    plt.ylabel('Differential Instrumental Magnitude')
-    plt.title('XX Cyg')
-    plt.savefig('cal/XX_Cyg_lc.png', dpi=150)
-    plt.show()
