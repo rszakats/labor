@@ -15,7 +15,7 @@ filter, etc.
 The script creates the master bias, then the master dark(s) and master flat(s).
 Then, the object frames are processed. For this parallel processing is used.
 All the available CPU cores are utilized for this. For machines with smaller
-amount of RAM this is not recommended. Now if the available system RAM is 
+amount of RAM this is not recommended. Now if the available system RAM is
 lesser than 16000000000 bytes, the cpu_count is set to 4, and if it is lesser
 than 8000000000 bytes, is set to 2.
 
@@ -282,7 +282,7 @@ def do_phot(ifile, xs, ys, radii, i, ids):
     Returns
     -------
     result : array
-        Returns the JD, filter and the background substracted fluxes for the 
+        Returns the JD, filter and the background substracted fluxes for the
         selected stars and aperture number.
 
     """
@@ -292,8 +292,8 @@ def do_phot(ifile, xs, ys, radii, i, ids):
     try:
         jd = header['jd']  # Getting julian date from header
     except Exception as e:
-        # print(e)
-        times = header['DATE-OBS']+ " " + header['TIME-OBS']
+        print(e)
+        times = header['DATE-OBS'] + " " + header['TIME-OBS']
         times = Time(times, format='iso', scale='utc')
         jd = times.jd
     filt = header['filter']
@@ -453,7 +453,7 @@ if __name__ == "__main__":
                     hdul_d = fits.open('master/dark'+str(exps[0])+'.fits')
                     ratio = exp/exps[0]
                     # print(f"ratio: {ratio}")
-                    # hdul_d *= ratio 
+                    # hdul_d *= ratio
                 mdark = hdul_d[0].data
                 mdark *= ratio
                 flats.append(hdu[0].data - mdark - mbias)
@@ -479,17 +479,17 @@ if __name__ == "__main__":
 
     if psutil.virtual_memory()[1] > 16000000000.:
         tc = mp.cpu_count() - 1
-        
+
     else:
         if psutil.virtual_memory()[1] > 8000000000.:
             if mp.cpu_count() > 4:
                 tc = 4
-                
+
         else:
             tc = 2
     pool = mp.Pool(tc)
     print(f"Utilizing {tc} threads.")
-    
+
     result_objects = [pool.apply_async(process_object_frames, args=(
         ofile, ref_image_data, mbias, i, ll))
         for i, ofile in enumerate(objlist['fname'])]
@@ -563,8 +563,8 @@ if __name__ == "__main__":
         ids.append(int(input()))
         x.append(sources['xcentroid'][np.where(sources['id'] == ids[0])][0])
         y.append(sources['ycentroid'][np.where(sources['id'] == ids[0])][0])
-        dist = (np.sqrt(((sources['xcentroid']-x[0])**2)+
-                       ((sources['ycentroid']-y[0])**2)) < 4100.)
+        dist = (np.sqrt(((sources['xcentroid'] - x[0])**2) +
+                       ((sources['ycentroid'] - y[0])**2)) < 4100.)
         brightest = sources[dist]
         brightest.sort('flux')
         brightest.reverse()
@@ -631,8 +631,7 @@ if __name__ == "__main__":
             lc = np.vstack((lc, result))  # Append to array
     # Writing lightcurve data to file.
     # print(lc[0])
-    # np.savetxt('cal/lc.dat', lc)
-               #, fmt='%10.6f')
+    # np.savetxt('cal/lc.dat', lc)  #, fmt='%10.6f')
     lct = Table(lc)
     lct.write('cal/lc.dat', format='ascii', overwrite=True)
     for filt in filters:
@@ -652,7 +651,7 @@ if __name__ == "__main__":
         comp6err = lcp[:, 14].astype(float)
         var = lcp[:, 1].astype(float)
         varerr = lcp[:, 2].astype(float)
-    
+
         comp = (comp1+comp2+comp3+comp4+comp5+comp6)/6.  # Mean of comp stars
         comp_err = 1.0857*((comp1err+comp2err+comp3err+comp4err +
                             comp5err+comp6err) /
@@ -663,7 +662,8 @@ if __name__ == "__main__":
         # Plotting the comp check plots.
         # If one of the comparison stars is not ~constant we need to select an
         # other one insted of that. We plot the median and write the standard
-        # deviation of the points to the title. Smaller std is (usually) better.
+        # deviation of the points to the title. Smaller std is (usually)
+        # better.
         print("\n")
         for i in range(len(comps)):
             if i < 5:
@@ -676,7 +676,8 @@ if __name__ == "__main__":
                 label = f"comp {i} - comp {i+1} {filt}"
                 fname = f"compcheck_{filt}_{i}-{i+1}"
             else:
-                plt.plot(time-2450000, flux2mag(comps[i])-flux2mag(comps[0]), '.')
+                plt.plot(time-2450000,
+                         flux2mag(comps[i])-flux2mag(comps[0]), '.')
                 mean, median, std = sigma_clipped_stats(flux2mag(comps[i]) -
                                                         flux2mag(comps[0]),
                                                         sigma=3.0)
@@ -691,9 +692,10 @@ if __name__ == "__main__":
             plt.ylabel(label)
             plt.savefig(f"cal/{fname}", dpi=150)
             plt.show()
-    
-        # Plotting the differential lightcurve of the target. We used an artifical
-        # comparison star made from the 6 selected comparison star's flux.
+
+        # Plotting the differential lightcurve of the target.
+        # We used an artifical comparison star made from the 6 selected
+        # comparison star's flux.
         hdu = fits.open(objlist['fname'][0])
         header = hdu[0].header
         target = header['object']
