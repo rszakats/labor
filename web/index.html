@@ -39,6 +39,9 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#labor">ELTE Lab</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#simplefv">Simple FITS Viewer</a>
+          </li>
           <!-- <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#egyeb">Egyéb szoftverek</a>
           </li>
@@ -140,58 +143,37 @@ On this webpage every preliminary information and file can be found.</p>
       </div>
     </div>
   </section>
-<!--
-  <section id="egyeb">
+
+  <section id="simplefv" class="bg-light">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto">
-          <h2>Egyéb szoftverek</h2>
-          <p class="lead">A korábban felsorolt szükséges szoftvereken kívül még felmerülhet a használata egyéb programoknak is. A laborvezetők feltételezik, hogy a hallgatók rendelkeznek alapszintű számítástechnikai ismeretekkel, így
-						 például fájlok mozgatása és létrehozása nem okoz nekik gondot az általuk használt operációs rendszeren. Alább felsorolunk pár olyan alkalmazást, ami hasznos lehet a gyakorlat során.</p>
+          <h2>Simple FITS Viewer</h2>
+          <p class="lead">Simple FITS Viewer is a small and quick GUI program to view astronomical fits files. 
+            It is mainly a hobby project to get some experience with <a href="https://github.com/PySimpleGUI" target="_blank">PySimpleGUI</a>. 
+          You can visit the Github page of the project <a href="https://github.com/rszakats/simple_fits_viewer" target="_blank">here</a>.
+        <li>Main window: </li>
+        <img src="screenshots/simplefitsv_main.png" alt="Main window" width="708" height="431" style="margin:0px 0px 20px 0px">
+        <br/>
+        <li>Main window with a fits file opened: </li>
+        <img src="screenshots/simplefitsv_opened.png" alt="Fits opened" width="708" height="431" style="margin:0px 0px 20px 0px">
+        <br/>
+        <li>With the coordinate grid on: </li>
+        <img src="screenshots/simplefitsv_wcs.png" alt="WCS grid on" width="708" height="431" style="margin:0px 0px 20px 0px">
+        <br/>
+        <li>Header displayed: </li>
+        <img src="screenshots/simplefitsv_header.png" alt="Header" width="708" height="431" style="margin:0px 0px 20px 0px">
+        </p>
 		  <ul>
-			<li>Terminálban text editorok: <a href="https://www.nano-editor.org/" target="_blank">GNU nano</a>, <a href="https://www.cs.colostate.edu/helpdocs/vi.html" target="_blank">vi</a></li>
-			<li>Grafikus text editorok: <a href="https://wiki.gnome.org/Apps/Gedit" target="_blank">gedit</a>, <a href="https://en.wikipedia.org/wiki/Pluma_(editor)" target="_blank">pluma</a>, Windowsra: <a href="https://notepad-plus-plus.org/" target="_blank">notepad++</a></li>
-			<li>Egy elég egyszerű és hatékony linux-os fájlkezelő a <a href="https://midnight-commander.org/" target="_blank">Midnight Commander</a>.</li>
-			<li>Mi a terminál, a bash és a parancssor között a különbség? <a href="https://youtu.be/hMSByvFHOro" target="_blank">Videó</a>.</li>
+			<!-- <li>A legfrissebb verzió letölthető <a href="https://cloud.konkoly.hu/s/baR8p5iDnSc9XJF" target="_blank">innen</a>.</li>
+			<li><a href="https://fitsh.net/wiki/Installation" target="_blank">Telepítési útmutató</a></li>
+			<li>FITSH taszkok <a href="https://fitsh.net/wiki/Tasks" target="_blank">leírása</a>.</li>
+			<li>Pár <a href="https://fitsh.net/wiki/Example:Main_Page" target="_blank">példa</a>.</li> -->
 		  </ul>
         </div>
       </div>
     </div>
   </section>
-
-  <section id="letoltes" class="bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <h2>Letöltések</h2>
-          <p class="lead"></p>
-		  <ul>
-			<li><a href="https://cloud.konkoly.hu/s/yDDLqF9ymPyRqrm" target="_blank">Nyers adatok.</a> Kb. 1.8 GB</li>
-			<li><a href="https://cloud.konkoly.hu/s/baR8p5iDnSc9XJF" target="_blank">FITSH 0.9.3</a></li>
-			<li><a href="https://cloud.konkoly.hu/s/qwbWNB2r9j2m2nc" target="_blank">imexam</a> és <a href="https://cloud.konkoly.hu/s/4MBPfHLMiyFE4Qr" target="_blank">tvmark</a> szkriptek.</li>
-			<li>Bevezető a <a href="https://cloud.konkoly.hu/s/Ywfr7rCDpSqapFc" target="_blank">CCD</a> képek feldolgozásának alapjaiba.</li>
-			<li>Korábbi labor prezentáció.<a href="https://cloud.konkoly.hu/s/6YPWFGqiHYjGyRm" target="_blank">(pdf)</a></li>
-		  </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-<section id="jegyzet">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <h2>Jegyzet</h2>
-          <p class="lead">A laborhoz készített jegyzet az alább látható linken letölthető. Ebben végigvesszük az alapvető tudnivalókat és az egyes lépéseket részletesen. A feladatoknál megtalálható egy rövid leírása az adott problémának
-						és általában egy példa megoldás is az adott kérdéshez. Bizonyos helyeken külön kiemeltük a hallgatók által evégzendő feladatokat, amiket a meglévő tudásuk és a példák alapján kell megoldaniuk. Mivel az óra
-						interaktív lesz, a gyakorlatvezetők tudnak segíteni menet közben a felmerült problémákon és lehet tőlük kérdezni. Az órák között lehetőség lesz egyedül is dolgozni a feladatokon.</p>
-		  <ul>
-			<li>A jegyzet letölthető <a href="https://cloud.konkoly.hu/s/64cXDZoT8spANcW" target="_blank">innen</a>.</li>
-		  </ul>
-        </div>
-      </div>
-    </div>
-  </section> -->
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
